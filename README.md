@@ -1,6 +1,14 @@
 ### Jinglr
 
-Collaborative songwriting.
+Collaborative songwriting. The app is up at http://jinglr.com if you'd like to play around with it.
+
+I've decided to open source this for two reasons:
+
+1) Why not?
+
+2) I was never able to market this, nor did I have the time to continue development on this as better projects came along.
+
+Have fun with it, and please let me know if anything comes from it!
 
 #### Setup
 
