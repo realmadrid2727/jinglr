@@ -1,0 +1,438 @@
+en:
+  time:
+    ago: " ago"
+  loading: "Loading..."
+  
+  activerecord:
+    attributes:
+      site_feedback:
+        desc: "Message"
+    errors:
+      models:
+        site_feedback:
+          attributes:
+            desc:
+              blank: "is required. Play nice"
+  
+  flash:
+    notice:
+      create: "Your %{item} was successfully created."
+      update: "Your %{item} was successfully updated."
+      destroy: "Your %{item} was successfully removed."
+      follow: "You are now following %{user}"
+      unfollow: "You are no longer following %{user}"
+      accept_merge: "You have successfully merged tracks."
+      decline_merge: "You have successfully declined merging tracks."
+      set_username: "You have successfully created your username."
+      follow_jingle: "You will be notified when comments or tracks are added to this jingle."
+      unfollow_jingle: "You will no longer be notified when comments or tracks are added to this jingle."
+      feedback: "Thank you for your feedback, we really appreciate it. If necessary, we will contact you through the email address registered to your account."
+    alert:
+      create: "Your %{item} could not be created at this time. Please try again."
+      update: "Your %{item} could not be updated at this time. Please try again."
+      destroy: "Your %{item} could not be removed at this time. Please try again."
+      follow: "Something went wrong while attempting to follow %{user}. Please try again."
+      unfollow: "Something went wrong while attempting to stop following %{user}. Please try again."
+      jingle_upload: "Accepted file formats are: MP3, WAV, AIF, OGG, and AAC"
+      accept_merge: "Something went wrong while attempting to merge tracks."
+      decline_merge: "Something went wrong while attempting to decline merging tracks."
+      set_username: "Something went wrong while attempting to set up your username. Please try again."
+      feedback: "Something went wrong while attempting to send feedback. Please try again."
+      nice_try: "Nice try, slick."
+    error: "Looks like you've got some fixing to do:"
+  
+  errors:
+    page:
+      tag_404: "It appears you've been bamboozled."
+      explain_404: "This page doesn't exist."
+      return_home: "Return home"
+      report_problem: "Report a problem"
+    follow:
+      self_follow: "You can't follow yourself. That doesn't even make sense!"
+      already_following: "You are already following this person. You're coming on a little strong."
+      
+  confirm:
+    delete: "Are you sure you want to DELETE this %{item}"
+    
+  filter:
+    title: "Filter your results:"
+    from: "Filter results between"
+    to: "and"
+      
+  buttons:
+    compose: "Do It"
+    do_it: "Do It"
+    collaborate: "Add a Track"
+    mixer: "Add to Mixer"
+    let_me_in: "Let Me In"
+    play: "Play"
+    pause: "Pause"
+    stop: "Stop"
+    play_original: "Play Original Track"
+    delete: "Delete"
+    view_parent: "Master Track"
+    save: "Save"
+    add: "Add"
+    create: "Create"
+    update: "Update"
+    edit: "Edit"
+    delete: "Delete"
+    delete_account: ":-("
+    login: "Login"
+    register: "Register"
+    sign_in: "Sign In"
+    sign_up: "Sign Up"
+    lurk: "Not Right Now"
+    byes: "Yes"
+    bno: "No"
+    cancel: "Cancel"
+    ok: "OK"
+    decline: "Decline"
+    accept: "Accept"
+    previous: "Previous"
+    prev: "Prev"
+    next: "Next"
+    got_it: "Got It"
+    tour_help: "Help!"
+    help: "Help"
+    follow: "Follow"
+    unfollow: "Stop Following"
+    no_more_updates: "Stop Receiving Updates"
+    services:
+      tweet: "Tweet"
+    
+  
+  models:
+    jingle: "jingle"
+    jingle_comment: "comment"
+    jingle_like: "like"
+    jingle_favorite: "favorite"
+    user: "user"
+    notification: "notification"
+    listener: "listener"
+    stuff: "stuff" # Just a general 'thing'
+    thing: "thing" # Just a general 'thing'
+  
+  placeholders:
+    add_comment: "Write a comment..."
+  
+  menu:
+    new_jingle: "Create"
+    home: "Home"
+    profile: "Profile"
+    feed: "Jingle Feed"
+    jingles: "Jingles"
+    discover: "Discover"
+  
+  header:
+    new_jingle: "Create"
+    jinglr: "Jinglr"
+    user:
+      profile: "View Profile"
+      settings: "Account Settings"
+      help: "Help"
+      feedback: "Report a Problem"
+      logout: "Logout"
+  
+  audio_player:
+    title: "Jingle Player"
+    view: "View Jingle"
+    
+  landing:
+    header:
+      home: "Home"
+      about: "About"
+      newsletter: "Get Notified"
+    
+  
+  track_mixer:
+    title: "Track Mixer"
+    owner: "%{user}'s track"
+    drop_tag: "Drop a Track Here"
+    too_many_tracks: "Too Many Tracks"
+    errors:
+      too_many_tracks: "You're limited to two tracks in the mixer. Tracks don't grow on trees."
+      not_enough_tracks: "You need two tracks in the mixer before you can use it."
+      remove_error: "Something went wrong while attempting to remove this track from the mixer."
+    index:
+      title: "Track Mixer"
+      guide: "Align the Intro"
+      empty: "<p><strong>In order to use the track mixer, you've gotta have two tracks to mix.</strong></p> Drag and drop any jingle into your track mixer. You'll find the track mixer on the left sidebar anywhere jingles exist."
+      empty_head: "You Need Two Tracks"
+      track:
+        view: "View"
+        offset: "Offset Seconds: "
+        your_track: "Your Track"
+  
+  sessions:
+    new:
+      title: "Login to Jinglr"
+      facebook: "Sign in with Facebook"
+      twitter: "Sign in with Twitter"
+      facebook_register: "Sign up with Facebook Instead"
+      twitter_register: "Sign up with Twitter Instead"
+      new: "Psst. Do you need an account?"
+      create: "Create an Account"
+  
+  site:
+    index:
+      title: "Welcome to Jinglr"
+    login_or_register:
+      title: "Not So Fast!"
+      preamble: "Jinglr is a place to collaborate with others with the goal of having fun and creating music. In order to do anything besides listen, you'll need an account. So, we present you with two options:"
+    leave_feedback:
+      title: "Report a Problem"
+      category: "Category"
+      preamble: "If you're experiencing trouble with the site, please select a category and be as descriptive as possible. If you just want to leave some feedback, that's cool too."
+    
+  jingles:
+    index:
+      title: "Jingles"
+      empty: "There are no jingles here."
+      header:
+        most_likes: "Most Likes"
+        new: "Newest"
+        most_favorites: "Most Favorites"
+      browser:
+        title: "Trending Hashtags"
+    show:
+      title: "Jingle"
+      browser:
+        player: "Jingle Player"
+        title: "Options"
+        add_track: "Add a Track"
+        view_tree: "View Jingle Connections"
+        cancel: "Cancel"
+        add_to_mixer: "Add to Mixer"
+    new:
+      title: "Compose a Jingle"
+      record: "Record Something"
+      upload: "Upload Audio"
+      add_track: "Add a Track"
+      describe: "Describe this jingle. We suggest using #hashtags to categorize it."
+    jingle:
+      favorite: "Favorite"
+      like: "Like"
+      comment: "Comment"
+      collaboration: "Collaboration"
+      follow: "Follow"
+    tracks:
+      empty: "This jingle has no tracks."
+      original: "This was the original track."
+      pending: " has added a track. Would you like to accept?"
+      pending_sent: "This is your track. %{user} needs to approve the merge."
+      added: "Track added by %{added_by}, created by %{track_by}"
+      decline:
+        title: "Enter a comment (optional)"
+      origin:
+        title: "This jingle uses %{track} by %{user}"
+        this_track: "this track"
+    creating:
+      title: "Please Wait While We Create Your Jingle"
+    connections:
+      origin: "Used to Make Jingle You're Viewing"
+      origin_master: "Made Using Jingle You're Viewing"
+      parent: "Master Track to Jingle You're Viewing"
+      child: "Contribution to Jingle You're Viewing"
+      empty_head: "Ah Well, Maybe Next Time"
+      empty: "Looks like this jingle has no connections. Don't worry, we're sure it'll happen soon."
+  
+  jingle_comments:
+    says: "says: "
+    login_or_register: "%{login} or %{register} to comment."
+    actions:
+      added_track: "Added a Track"
+    errors:
+      too_many_comments: "You're commenting too much, too fast. We're giving you a chill pill. Try again in a minute."
+      duplicate: "Looks like you tried to say this a few too many times."
+  
+  registrations:
+    new:
+      has_account: "Already have an account?"
+      agree: "I Agree to your Terms & Services"
+      register: "Sign Me Up!"
+      suggest: "Did you mean "
+      
+  users:
+    index:
+      title: "Home"
+      browser:
+        title: "Home"
+        jingles: "Your Jingles"
+        view: "Public Profile"
+        edit: "Edit Account"
+        notifications: "Notifications"
+        favorites: "Favorites"
+    edit:
+      title: "Account Settings"
+      captions:
+        avatar: "Upload an Avatar"
+        details: "Modify Your Details"
+        password: "Change Your Password"
+        email: "Update Your Email Address"
+        delete: "Delete Your Account"
+      labels:
+        current_password: "Current Password"
+        password: "Password"
+        new_password: "New Password"
+        password_confirm: "Once Again"
+        email: "Email"
+        username: "Username"
+      header:
+        avatar: "Profile"
+        account: "Account"
+        more: "More..."
+    jingles:
+      title: "Your Jingles"
+      empty: "Looks like you haven't created any jingles yet. Start by %{discover}."
+      empty_link: "creating one now"
+    notifications:
+      header:
+        notifications: "Notifications"
+        settings: "Settings"
+      captions:
+        settings: "Notification Settings"
+      index:
+        title: "Your Notifications"
+        empty: "You have no notifications."
+      tag: "Your Unread Notifications"
+      mark_all: "Mark All Viewed"
+      mark_single: "Mark Viewed"
+      notification: "new notification"
+      you: "You"
+      deleted: "This was deleted."
+      user:
+        follow: "%{user} started following you"
+      jingle:
+        like: "%{user} liked your jingle"
+        comment: "%{user} commented on your jingle"
+        merge_request: "%{user} added a track to your jingle"
+        merge_accept: "%{user} accepted your merge request"
+        merge_decline: "%{user} declined your merge request"
+        origin_create: "%{user} created a jingle using your jingle"
+      jingle_update:
+        comment: "%{user} commented on a jingle you're following"
+        merge: "%{user} added a track to a jingle you're following"
+        origin_create: "%{user} created a new jingle using a jingle you're following"
+      settings:
+        user_jingles: "Send an email when someone:"
+        jingles: "Also send an email when:"
+        email_jingle_comments: "Comments on your jingles"
+        email_jingle_likes: "Likes your jingles"
+        email_jingle_merge: "Wants to add a track to your jingles"
+        email_jingle_decline: "Declines your track on their jingle"
+        email_jingle_accept: "Accepts your track on their jingle"
+        email_jingle_origin: "Uses your jingle to create another jingle"
+        email_jingle_update: "A jingle you're following has some new activity"
+    favorites:
+      index:
+        title: "Your Favorites"
+        empty: "You have no favorites. Discover some now!"
+    select_username:
+      title: "Create a Username"
+      helper: "Before getting your jam on, you'll need to decide on a username."
+  
+  feeds:
+    index:
+      title: "Jingles By People You Follow"
+      empty: "Looks like you're not following anyone. Start by %{discover}."
+      empty_link: "discovering new jingles"
+  
+  profiles:
+    show:
+      title: "%{user}'s Profile"
+      labels:
+        follow: "Follow"
+        following: "Following"
+        unfollow: "Unfollow"
+        follower: "Follower"
+        followers: "Followers"
+        listen: "Listen"
+        listening: "Listening"
+        listener: "Listener"
+        listeners: "Listeners"
+        listening_to: "Listening To"
+        jingle: "Jingle"
+        jingles: "Jingles"
+        bio: "Bio"
+        connect: "Connect"
+    followers:
+      title: "%{user}'s Followers"
+    following:
+      title: "Followed by %{user}"
+  
+  hashtags:
+    show:
+      title: "%{tag}"
+      no_results_head: "We've Got Some Bad News..."
+      no_results: "No results found for hashtag "
+      results: "We found %{count} for hashtag "
+      labels:
+        result: "result"
+      
+  search:
+    index:
+      title: "Search Results"
+      no_results_head: "We've Got Some Bad News..."
+      no_results: "No results found for "
+      results: "We found %{count} for "
+      range: "within the date range you provided. Try refining your search."
+      labels:
+        result: "result"
+  
+  delete_account:
+    plead: "Can we talk you out of it?"
+  
+  privacy:
+    title: "Privacy Policy"
+  help:
+    title: "FAQs"
+    title_long: "Frequently Asked Questions"
+    top: "Back to top"
+    browser:
+      title: "Categories"
+      jingles: "Jingles"
+      mixer: "Mixer"
+      users: "Users"
+      general: "General"
+    jingles:
+      q1: "What is Jinglr, and what is jingle?"
+      a1: "A jingle is a short slogan, verse, or tune designed to be easily remembered. Jinglr allows users to create songs by mixing jingles uploaded by everyone. Let's say you're a guitarist and you come up with a cool little riff. You upload it, and then later a drummer listens to it and decides he wants to add on to it. Suddenly, you guys are collaborating!"
+      q2: "How do I create a jingle?"
+      a2: "Easy. Just record something, click the <span class='text-primary'>\"Create\"</span> button on the top left of your screen, upload it, write a short description (we suggest you give it some <span class='label bg-dark'>#hashtags</span>), and create. That's all there is to it."
+      q3: "I found a jingle I want to add a track to. How do I do it?"
+      a3: "Simple. You click the \"Add a Track\" button, then use the form to upload an audio file. It will be added to the track mixer right below the jingle you're adding a track to. You'll use the mixer to align the track (by clicking and dragging) to start when you want it to. This is useful, because while one person's jingle may start playing at the 1-second mark, maybe yours starts at the 2-second mark and you need to adjust things so they're synchronized. Once you're happy with it, add a description (again, we suggest you give it some <span class='label bg-dark'>#hashtags</span>) and create."
+      q4: "Do I always have to upload new stuff to use Jinglr?"
+      a4: "Nope. You can use the <span class='text-primary'>track mixer</span> to mix together existing jingles belonging to anyone else. We're not kidding when we call it collaborative. Think of it like what rappers do when they sample existing music to create new stuff."
+      q5: "What are these \"jingle connections\" I see when viewing a jingle?"
+      a5: "Ah, yes, that. It just shows you what things have been done with that jingle. Also, if it was created by mixing two existing jingles, it'll show you the originals."
+      q6: "I heard a jingle I liked, and I want to be notified whenever more tracks are added to it."
+      a6: "No problem. Click the little <i class='icon-bullhorn text-primary'></i> bullhorn button to be notified of when the jingle is updated. You can click it again to stop receiving notifications."
+    mixer:
+      q1: "What is the track mixer, and where can I find it?"
+      a1: "The track mixer allows you to take two jingles and mix them together to create something new. If you heard, for example, a nice piano tune, and another person has a sweet voice that goes with it perfectly, you can add those two jingles to the track mixer and get to editing. The track mixer is found on the left sidebar of any page containing jingles."
+      q2: "How do I use the track mixer?"
+      a2: "After you have two tracks in there, you can click and drag tracks along the timeline to adjust their starting position. Preview your new jingle by clicking the play button. Once you're happy with it, add a description and create. The original creators of the jingles you used will be notified, so they'll be able to admire your work. <strong>Note:</strong> Due to browser inconsistencies, you should preview the mix a couple of times before committing to it, because the offsets may be off slightly the first or second play through. This is the highest-priority feature being worked on, so rest assured, it'll be fixed."
+      q3: "I want to mix an existing jingle with an audio file I have."
+      a3: "For that, click on <span class='text-primary'>\"Add a Track\"</span> when viewing the jingle. It'll bring up a track mixer that lets you upload a file."
+    users:
+      q1: "How do I edit my account?"
+      a1: "You can click the <span class='text-primary'>\"Home\"</span> menu link on the left, then click <span class='text-primary'>\"Edit Account\"</span> in the sidebar menu. Or, you can click on your name on the top right of the page and then click the <span class='text-primary'>\"Account Settings\"</span> link."
+      q2: "I'm tired of receiving so many notification emails. How can I control that?"
+      a2: "Click the <span class='text-primary'>\"Home\"</span> menu link on the left, then the <span class='text-primary'>\"Notifications\"</span> link. From there, click the <span class='text-primary'>\"Settings\"</span> tab up top and go wild."
+      q3: "I heard a jingle I really liked. Is there a way to save it?"
+      a3: "You bet. Click the <i class='icon-heart text-primary'></i> heart button and the jingle will be added to your favorites list, which you can access from the <span class='text-primary'>\"Home\"</span> menu, then the sidebar. The owner of the jingle won't know you marked it as a favorite."
+      q4: "So-and-so is a great musician. I want to follow them."
+      a4: "You stalker, you. View their profile by clicking on their name or avatar, then click the <span class='text-primary'><i class='icon-bullhorn'></i> Follow</span> button."
+    general:
+      q1: "________ is not working. Nothing works. Ugh."
+      a1: "Damn. That sucks. Bugs happen, and we'd appreciate it if you filled out a bug report and provide as much detail as possible, like what you were doing, what page you were on, your browser, operating system, etc. To report a bug, click on your name at the top right of the page and click <span class='text-primary'>\"Report a Problem\"</span>."
+      q2: "Can you implement a feature I want?"
+      a2: "We're always open to suggestions. Click on your name at the top right of the page and click <span class='text-primary'>\"Report a Problem\"</span>. Change the category to something more fitting, and submit your request. While we cannot guarantee anything, we'll definitely read through it and, if it's worthwile, make it happen."
+    
+  beta:
+    title: "We're in Beta!"
+    track_mixer:
+      index: "Due to browser inconsistencies, you should preview the mix a couple of times before committing to it, because the offsets may be off slightly the first or second play through. This is the highest-priority feature being worked on, so rest assured, it'll be fixed."
+    notifications:
+      settings: "We currently have emailing disabled while we work on some things. You can still modify these settings, and when emailing does roll out you'll already have your settings saved."

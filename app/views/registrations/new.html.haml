@@ -1,0 +1,27 @@
+%header.panel-heading.bg.bg-info.text-center= t('buttons.register')
+= form_for(resource, as: resource_name, url: registration_path(resource_name), html: {class: "panel-body"}) do |f|
+  = devise_error_messages!
+  .form-group
+    = f.label :username, class: "control-label"
+    .input-group
+      %span.input-group-addon#username_check= APP_CONFIG["domain"]+"/"
+      = f.text_field :username, autofocus: true, class: "form-control register-user"
+  .form-group
+    = f.label :email, class: "control-label"
+    = f.email_field :email, class: "form-control", data: {suggest: t('registrations.new.suggest')}
+  .form-group
+    = f.label :password, class: "control-label"
+    = f.password_field :password, class: "form-control"
+  .form-group
+    = f.label :password_confirmation, class: "control-label"
+    = f.password_field :password_confirmation, class: "form-control"
+    
+  %button.btn.btn-success.btn-block{type: "submit"}= t('registrations.new.register')
+  .line.line-dashed
+  %a.btn.btn-facebook.btn-block.m-b-sm{href: user_omniauth_authorize_path(:facebook)}
+    %i.icon-facebook.pull-left
+    = t('sessions.new.facebook_register')
+  .line.line-dashed
+  %p.text-muted.text-center
+    %small= t('registrations.new.has_account')
+    = link_to(t('buttons.sign_in'), new_user_session_path, class: "btn btn-white btn-block")

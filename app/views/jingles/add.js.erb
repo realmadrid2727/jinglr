@@ -1,0 +1,4 @@
+$modal = $('<div class="modal fade" id="ajaxModal"><div class="modal-body"></div></div>');
+$('body').append($modal);
+$modal.modal({backdrop: "static"});
+$modal.load("<%= merge_remote_jingle_path(jingle) %>");

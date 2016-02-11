@@ -1,0 +1,14 @@
+%nav.nav-primary.hidden-xs
+  %ul.nav
+    - if user_signed_in?
+      - if allow_remote_create? && !current_user.username.blank?
+        %li#create-button= icon_link(t('menu.new_jingle'), {href: new_remote_jingles_path('remote'), class: "lter", data: {toggle: "ajaxModal", modalclass: "new_jingle_modal"}}, "icon-plus")
+      - else
+        %li#create-button= icon_link(t('menu.new_jingle'), {href: new_jingle_path, class: "lter"}, "icon-plus")
+    - else
+      %li= icon_link(t('menu.new_jingle'), {href: login_or_register_path, class: "lter", data: {toggle: "ajaxModal", modalclass: "login_or_register"}}, "icon-plus")
+    
+    %li#home-button= icon_link(t('menu.home'), {href: root_path}, "icon-home")
+    - if user_signed_in?
+      %li#feed-button= icon_link(t('menu.feed'), {href: feed_path}, "icon-music")
+    %li#discover-button= icon_link(t('menu.discover'), {href: jingles_path}, "icon-globe")

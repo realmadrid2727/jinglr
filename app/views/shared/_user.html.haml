@@ -1,0 +1,28 @@
+%ul.nav.navbar-nav.navbar-right
+  - if user_signed_in? && !current_user.username.blank?
+    %li.hidden-xs
+      %a.dropdown-toggle#notifications_indicator{href: notifications_user_index_path, data: {toggle: "dropdown"}}
+        %i.icon-bell-alt.text-white
+        %span.badge.up.bg-info.m-l-n-sm#notifications_indicator_number{style: "#{'display: none;' unless current_user.notifications.unread?}"}= current_user.notifications.unread.count
+  
+      %section.dropdown-menu.animated.fadeInUp.notifications-bar
+        
+        
+  - if user_signed_in?
+    %li.dropdown
+      %a.dropdown-toggle{href: "#", data: {toggle: "dropdown"}}
+        %span.thumb-xs.avatar.pull-left.m-t-n-xs.m-r-xs#main-header-avatar
+          = image_tag(current_user.avatar(:small), alt: current_user.display_name, id: "main-header-avatar-img")
+        = current_user.display_name
+        %b.caret
+      %ul.dropdown-menu.animated.fadeInLeft
+        %li= link_to(t('header.user.profile'), profile_path(current_user.username))
+        %li= link_to(t('header.user.settings'), edit_user_path(current_user))
+        %li.divider
+        %li= link_to(t('header.user.help'), help_path)
+        %li= link_to(t('header.user.feedback'), leave_feedback_path, data: {toggle: "ajaxModal"})
+        %li.divider
+        %li= link_to(t('header.user.logout'), logout_path, data: {method: :delete})
+  - else
+    %li= link_to(t('buttons.login'), login_path)
+    %li= link_to(t('buttons.register'), register_path)

@@ -1,0 +1,20 @@
+- if content_for?(:browser)
+  %aside.aside-md.bg-light.lters.b-r
+    %section.vbox
+      %section.scrollable#browser-sidebar
+        .wrapper
+          #above-track-mixer
+            = yield :browser
+          
+          - if user_signed_in?
+            .list-group.bg-white#track-mixer{data: {max: APP_CONFIG["track_mixer_max"], success: t('track_mixer.drop_tag'), error: t('track_mixer.too_many_tracks')}}
+              .drop-overlay.bg-warning
+                %span= current_user.detail.track_mixer_too_many_tracks? ? t('track_mixer.too_many_tracks') : t('track_mixer.drop_tag')
+                
+              %span.bg-dark.list-group-item
+                = t('track_mixer.title')
+                = icon_link("", {href: mixer_index_path, class: "btn btn-default btn-xs pull-right", id: "view-track-mixer-button", data: {error: t('track_mixer.errors.not_enough_tracks')}}, "icon-pencil")
+                
+              - if track_mixer_has_track?
+                - current_user.detail.track_mixer_list_array.each do |i|
+                  = render partial: "mixer/browser_track", locals: {jingle: Jingle.find(i)}

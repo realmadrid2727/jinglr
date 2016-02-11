@@ -1,0 +1,9 @@
+.popover
+  .arrow
+  %h3.popover-title
+  .popover-content
+  %nav.popover-navigation
+    .btn-group
+      %button.btn.btn-sm.btn-default{data: {role: 'prev'}} &laquo; #{t('buttons.prev')}
+      %button.btn.btn-sm.btn-default{data: {role: 'next'}} #{t('buttons.next')} &raquo;
+    %button.btn.btn-sm.btn-info{data: {role: 'end'}}= t('buttons.got_it')

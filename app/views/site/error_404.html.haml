@@ -1,0 +1,15 @@
+.row.m-n
+  .col-sm-4.col-sm-offset-4
+    .text-center.m-b-lg
+      %h1.h.text-danger.animated.bounceInDown 404
+      %span.text-muted.block= t('errors.page.tag_404')
+      = t('errors.page.explain_404')
+    .list-group.m-b-sm.bg-white.m-b-lg
+      %a.list-group-item{href: home_path}
+        %i.icon-chevron-right
+        %i.icon-home
+        = t('errors.page.return_home')
+      %a.list-group-item{href: home_path}
+        %i.icon-chevron-right
+        %i.icon-bug
+        = t('errors.page.report_problem')

@@ -1,0 +1,28 @@
+.fileupload-buttonbar .fileinput-button {
+  float: none;
+  margin-right: 0;
+  margin-top: 10px;
+}
+
+.new-jingle-progress {
+  position: relative;
+  top: 15px;
+}
+
+#successful-upload {
+  position: relative;
+  top: 7px;
+}
+#file-uploader span.label {
+  position: relative;
+  top: 5px;
+}
+
+#new-jingle-button {
+  /*font-size: 18px;*/
+  font-weight: bold;
+}
+
+.settings label.text-left {
+  text-align: left !important;
+}

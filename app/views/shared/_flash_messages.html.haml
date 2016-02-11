@@ -1,0 +1,14 @@
+- if flash.notice
+  .col-lg-12
+    .alert.alert-success.m-t
+      %button.close{type: "button", data: {dismiss: "alert"}}
+        %i.icon-remove
+      %i.icon-ok-sign
+      = flash.notice
+- if flash.alert
+  .col-lg-12
+    .alert.alert-danger.m-t
+      %button.close{type: "button", data: {dismiss: "alert"}}
+        %i.icon-remove
+      %i.icon-ban-circle
+      = flash.alert

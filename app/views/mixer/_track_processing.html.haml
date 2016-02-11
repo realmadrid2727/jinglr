@@ -1,0 +1,31 @@
+.track.track-processing
+  .jingle
+    .generating_jingle.from_mixer
+      %i.icon-spinner.icon-spin
+
+:javascript
+  $(document).ready(function() {
+    jingleInterval = setInterval(checkJingleStatus, 3000);
+    
+    function checkJingleStatus() {
+      $.get("#{add_track_remote_jingle_path(jingle)}", function(data) {
+        $("<div>").load("#{add_track_remote_jingle_path(jingle)}", function() {
+          clearInterval(jingleInterval);
+          $("#mixer .panel-body.scrollable .track.track-processing").remove();
+          $("#mixer .panel-body.scrollable script:last-child").remove();
+          $("#mixer .panel-body.scrollable #track_1").remove();
+          $("#mixer .panel-body.scrollable .track_1").remove();
+          $("#mixer .panel-body.scrollable #track_offset_1").remove();
+          $("#mixer .panel-body.scrollable").append($(this).html());
+          fade_in_images();
+          if ($tracks[1] == undefined) {
+            if ($("#track_1").length > 0) {
+              $tracks[1] = $("#track_1");
+              mix.attachJPlayerObjects(1, $tracks[1]);
+              mix.rebind(0, $tracks[0]);
+            }
+          }
+        });
+      });
+    }
+  });

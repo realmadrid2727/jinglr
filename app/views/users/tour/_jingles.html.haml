@@ -1,0 +1,68 @@
+%li
+  %a#start-tour{href: "#"}
+    %i.icon-question-sign
+    = t('buttons.tour_help')
+
+:javascript
+  $(document).ready(function() {
+    tour = new Tour({
+      //backdrop: true,
+      name: "users-jingles",
+      template: "#{escape_javascript(render partial: 'shared/tour_template')}"
+    });
+      tour.addSteps([
+        {
+            element: ".player-navbar",
+            title: "Audio Player",
+            content: "This is your audio player. It's where you control what's currently playing.",
+            placement: "bottom"
+        },
+        {
+            element: "#create-button",
+            title: "Create a Jingle",
+            content: "When you want to upload a new track, click this button to get started in creating a new jingle.",
+            placement: "right"
+        },
+        {
+            element: "#home-button",
+            title: "Home Area",
+            content: "This is where you are right now. Clicking this will bring you back to your home area, where you can edit settings, view your jingles, notifications, and favorites.",
+            placement: "right"
+        },
+        {
+            element: "#feed-button",
+            title: "Jingle Feed",
+            content: "This will show you the jingles of everyone you're following.",
+            placement: "right"
+        },
+        {
+            element: "#discover-button",
+            title: "Discover Jingles",
+            content: "Discover new jingles by seeing a stream of them, by every registered user!",
+            placement: "right"
+        },
+        {
+            element: ".infinite-page.scrollable .panel.no-borders.hbox",
+            title: "Your Jingles",
+            content: "This is where your jingles will appear, once you add some.",
+            placement: "top"
+        },
+        {
+            element: ".infinite-page.scrollable .jingle:first",
+            title: "Your Jingles",
+            content: "These are your jingles. Try clicking all the icons and buttons to see what they do. <strong>Note:</strong> Clicking the submitted date on the top right of a jingle will let you view more about it.",
+            placement: "top"
+        },
+        {
+            element: "#track-mixer",
+            title: "Track Mixer",
+            content: "Drag and drop jingles here, then click the pencil button to edit them, and merge them to create a new jingle!",
+            placement: "top"
+        }
+    ]);
+    
+    $("body").on("click", "#start-tour", function(e) {
+      e.preventDefault();
+      tour.restart(true);
+    });
+  });

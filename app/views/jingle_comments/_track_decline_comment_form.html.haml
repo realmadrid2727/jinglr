@@ -1,0 +1,12 @@
+= form_tag decline_merge_jingle_path(jingle), id: "decline_jingle_#{jingle.id}", class: "pull-out decline-merge-submit-ajax", data: {jingle: jingle.id}, method: :put do
+  = text_field_tag "reason", nil, class: "form-control input-lg text-sm maxlength", placeholder: t('placeholders.add_comment'), maxlength: "200", autocomplete: "off", id: "jingle_merge_#{jingle.id}"
+
+:javascript
+  $(document).ready(function() {
+    $("#jingle_merge_#{jingle.id}").lilCharacterCount();
+    
+    $(".modal-submit").on('click', function(e) {
+      e.preventDefault();
+      $("#decline_jingle_#{jingle.id}").submit();
+    });
+  });

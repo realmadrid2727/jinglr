@@ -1,0 +1,7 @@
+.col-lg-12
+  %ul.breadcrumb
+    - breadcrumbs do |links|
+      - if links.any?
+        - links.each do |link|
+          %li{class: ('active' if link == links[-1])}
+            = link_to(link.text, link.url)

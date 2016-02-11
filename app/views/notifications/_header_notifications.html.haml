@@ -1,0 +1,22 @@
+- prev_notification = current_user.notifications.unread.length > 4 ? remote_notification_path(current_user.notifications.unread[0..3].last.prev_notification) : 0
+%section.panel.bg-white
+  %header.panel-heading
+    %strong
+      = t('users.notifications.tag')
+    %small.pull-right
+      = link_to(t('users.notifications.mark_all'), mark_notifications_viewed_path, class: "btn btn-warning btn-xxs notifications-mark-all-viewed", data: {remote: true, method: :put})
+  
+  .list-group.bg-light.notifications-list{data: {count: current_user.notifications.unread.count, prev: prev_notification}}
+    - if current_user.notifications.unread.blank?
+      .bg-light.panel.text-center.m-n
+        .panel-body
+          %i.icon-ban-circle
+    - else
+      - current_user.notifications.unread[0..3].each do |notification|
+        = render partial: "notifications/header_notification", locals: {notification: notification}
+            
+          
+  %footer.panel-footer.text-sm
+    %a.pull-right{href: notifications_user_index_path(anchor: "settings")}
+      %i.icon-cog
+    = link_to("See all notifications", notifications_user_index_path)

@@ -1,0 +1,137 @@
+%section#content
+  %div
+    .text-center.wrapper-lg
+      %h4.font-thin Collaborative songwriting for the masses.
+      %h1.text-uc.font-thin Make Music. <strong class="font-bold text-success">Together.</strong>
+
+    .carousel.carousel-fade.slide.auto.bg-black.dker#c-slide
+      %ol.carousel-indicators
+        %li.active{data: {target: "#c-slide", 'slide-to' => "0"}}
+        %li{data: {target: "#c-slide", 'slide-to' => "1"}}
+        %li{data: {target: "#c-slide", 'slide-to' => "2"}}
+      .carousel-inner
+        .item.active.row
+          .col-xs-7.text-right
+            = image_tag(asset_path("landing/slider2.png"), alt: "", class: "animated fadeInUpBig m-r-lg")
+          .col-sm-5
+            %h2.animated.fadeInLeftBig
+              %strong.text-white Jinglr
+              %span.h3.font-thin is an Open Jam Session.
+            %p.animated.fadeInUpBig.hidden-xs
+              Start by uploading an audio track. Others can add tracks to your jingle, and you can also add your track to other jingles. <br><br>
+              The result is awesome music.* <br><br>
+              %small.text-muted
+                %small *Or terrible music; we leave that up to you.
+              
+
+        .item.row
+          .col-xs-5.text-right
+            %h2.animated.fadeInUp
+              %strong.text-white Mix
+              %span.h3 &amp;
+              %span.font-thin Match.
+            %p.hidden-xs.animated.fadeInRight
+              Upload a track. Mix your tracks with others. <br>Or just mix existing tracks with other existing tracks. <br>
+              /= link_to("Live Preview", "#", class: "btn btn-lg btn-info btn-rounded btn-s-lg")
+
+          .col-xs-7
+            = image_tag(asset_path("landing/slider1.png"), alt: "", class: "animated fadeInRightBig")              
+
+        .item.row
+          .col-xs-6.text-right
+            = image_tag(asset_path("landing/slider3.png"), alt: "", class: "animated fadeInRightBig") 
+          .col-xs-6
+            %h2.animated.fadeInUp
+              %strong.text-white Share
+              %span.h3 Your Creations. <br>
+              %span.font-thin With Everyone.
+            %p.animated.fadeInDown.hidden-xs
+              Make the little Twitter bird sing. <br>Bombard your Facebook friends with music.
+              
+      = icon_link("", {href: "#c-slide", class: "left carousel-control", data: {slide: "prev"}}, "icon-angle-left")
+      = icon_link("", {href: "#c-slide", class: "right carousel-control", data: {slide: "next"}}, "icon-angle-right")
+
+    .bg-light.dker
+      .container.wrapper
+        .m-t-lg.m-b-lg.text-center
+          Want to play? We're in very early public beta.
+          = icon_link("But We Want You!", {href: register_path, class: "btn btn-lg btn-success m-r-sm m-l-sm m-b-sm m-t-sm"}, "icon-arrow-right")
+          
+
+  #about
+    .container
+      .m-xl.text-center.wrapper
+        %h2
+          %strong What is Jinglr?
+        %p.text-muted Quite simply, Jinglr provides a platform for collaborative music creation.
+      .row.m-xl
+        .col-lg-6.col-sm-6.media.m-b
+          %span.icon-stack.pull-left.icon-3x{data: {ride: "animated", animation: "fadeInLeft"}}
+            %i.icon-circle.icon-stack-base.text-success
+            %i.icon-music.text-white
+          .media-body{data: {ride: "animated", animation: "fadeInRight"}}
+            %h3.m-t-none Create.
+            %p
+              Upload audio tracks and
+              %span.label.bg-dark #hashtag
+              them. Hashtags make it easier to find new jingles.
+        .col-lg-6.col-sm-6.media.m-t-none.m-b
+          %span.icon-stack.pull-left.icon-3x{data: {ride: "animated", animation: "fadeInLeft"}}
+            %i.icon-circle.icon-stack-base.text-primary
+            %i.icon-beaker.text-white
+          .media-body{data: {ride: "animated", animation: "fadeInRight"}}
+            %h3.m-t-none Mix.
+            %p Others discover the jingle and either add their own track, or use it to create a new jingle.
+        .line.line-dotted{style: "clear: both;"}
+        .col-lg-6.col-sm-6.media
+          %span.icon-stack.pull-left.icon-3x{data: {ride: "animated", animation: "fadeInLeft"}}
+            %i.icon-circle.icon-stack-base.text-info
+            %i.icon-headphones.text-white
+          .media-body{data: {ride: "animated", animation: "fadeInRight"}}
+            %h3.m-t-none Listen.
+            %p Listen to jingles created by others all over the world with similar tastes.
+        .col-lg-6.col-sm-6.media
+          %span.icon-stack.pull-left.icon-3x{data: {ride: "animated", animation: "fadeInLeft"}}
+            %i.icon-circle.icon-stack-base.text-warning
+            %i.icon-comments.text-white
+          .media-body{data: {ride: "animated", animation: "fadeInRight"}}
+            %h3.m-t-none Communicate.
+            %p Comment, like, and follow jingles. Keep up-to-date with updates to your favorite tracks.
+
+  #contact.bg-light.b-t.b-b.clearfix
+    .container.text-center.m-xl{data: {ride: "animated", animation: "fadeIn"}}
+      %h2
+        %strong When Can I Use It?
+      %p.m-b
+        %strong Right now.
+        Jinglr is in public beta and still under active development. You can
+        = link_to("sign up", register_path)
+        and play around, or you can keep up with news:
+      .col-sm-12.m-b.clearfix
+        .btn-group.btn-group-justified
+          = icon_link("Like us on Facebook", {href: "http://facebook.com/jinglrapp", class: "btn btn-block btn-facebook"}, "icon-facebook")
+          = icon_link("Follow us on Twitter", {href: "http://twitter.com/jinglr", class: "btn btn-block btn-twitter"}, "icon-twitter")
+      /%p
+      /  Or, enter your email in the form below and receive updates. Don't worry, we promise not to spam.
+      /%form.form-inline.m-lg
+      /  .form-group
+      /    %input.form-control.input-lg{placeholder: "Your email"}
+      /  %button{type: "submit", class: "btn btn-white btn-lg"} Subscribe
+      
+
+%footer#footer
+  .bg-black.dk.clearfix
+    .container.text-center.wrapper
+      = icon_link("", {href: "#home", class: "nav-scroll scroll-to-top"}, "icon-angle-up icon-2x")
+  .bg-black.dker.wrapper
+    .container
+      .row.m-sm
+        .col-sm-4
+          %h5.text-uc.m-b.m-n Follow Us
+          = icon_link("", {href: "http://facebook.com/jinglrapp", class: "btn btn-icon btn-rounded btn-facebook"}, "icon-facebook")
+          = icon_link("", {href: "http://twitter.com/jinglr", class: "btn btn-icon btn-rounded btn-twitter"}, "icon-twitter")
+        .col-sm-4.text-xs.m-t-lg.text-center
+          &copy;
+          = Time.now.year
+          Orpheux Design<br>
+          All rights reserved.

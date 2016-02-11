@@ -1,0 +1,6 @@
+%article.comment-item.comment-reply{id: "track_reply_#{jingle.id}"}
+  %section.comment-body.panel.panel.text-sm.bg-light
+    .panel-body
+      %a.jp-play.btn.btn-xs.btn-info{href: jingle.track.url, id: "play_track_#{jingle.id}", data: {target: "track_#{jingle.id}", waveform: jingle.waveform_url(false), duration: jingle.original_track_duration}}
+        %i.icon-play
+      %strong= t('jingles.tracks.original')

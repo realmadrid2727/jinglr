@@ -1,0 +1,7 @@
+.email-suggestion {
+  text-align: right;
+  margin: 10px 0;
+}
+#suggestion {
+  cursor: pointer;
+}

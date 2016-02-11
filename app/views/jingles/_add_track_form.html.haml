@@ -1,0 +1,13 @@
+#mixer
+  .panel
+    .panel-body.scrollable
+      = render partial: "mixer/track", locals: {jingle: jingle, i: 0}
+    %i.icon-arrow-right.pull-right.mixer-scroll-right
+    %i.icon-arrow-left.pull-left.mixer-scroll-left{style: "display: none;"}
+    .panel-body.text-center
+      = icon_link("", {href: "#", class: "btn btn-info btn-lg track-play"}, "icon-play")
+
+:javascript
+  $(document).ready(function() {
+    fade_in_images();
+  });

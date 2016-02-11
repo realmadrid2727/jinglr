@@ -1,0 +1,13 @@
+%ul.nav.navbar-nav.navbar-right.player-navbar
+  %li
+    /%audio#audio_player{style: "width: 100%;", controls: "control", preload: "none", src: "/", type: "audio/mpeg"}
+    #audio_player
+    #audio_player_container
+      .track-img.jp-seek-bar
+        .progress
+        %img{src: asset_path("audio_player_bg.png"), data: {default: asset_path("audio_player_bg.png")}}
+        .label.bg-light.current-time 0:00
+      %button{type: "button", class: "btn btn-dark"}
+        %i.icon-play
+    #audio_player_details.bg-black
+      = link_to(t('audio_player.view'), jingles_path)

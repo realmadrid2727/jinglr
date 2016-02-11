@@ -1,0 +1,138 @@
+- content_for :title do
+  = t('help.title')
+  
+- content_for :browser do
+  .list-group.bg-white
+    %span.bg-dark.list-group-item= t('help.browser.title')
+    = icon_link(t('help.browser.jingles'), {href: "#jingles", class: "list-group-item"}, "icon-music m-r-xs")
+    = icon_link(t('help.browser.mixer'), {href: "#mixer", class: "list-group-item"}, "icon-beaker m-r-xs")
+    = icon_link(t('help.browser.users'), {href: "#users", class: "list-group-item"}, "icon-user m-r-xs")
+    = icon_link(t('help.browser.general'), {href: "#general", class: "list-group-item"}, "icon-question m-r-xs")
+
+.col-lg-12.m-t
+  %h3= t('help.title_long')
+  
+  #accordion.panel-group
+    .panel.bg-info#jingles
+      .panel-body
+        %h4.m-n= t('help.browser.jingles').html_safe
+    .panel
+      .panel-heading
+        = link_to(t('help.jingles.q1'), "#jingles_q1", class: "accordion-toggle", data: {parent: "#accordion", toggle: "collapse"})
+      .panel-collapse.collapse#jingles_q1
+        .panel-body.bg-light
+          = t('help.jingles.a1').html_safe
+          = icon_link(t('help.top'), {href: "#accordion", class: "pull-right btn btn-xxs btn-white m-t"}, "icon-arrow-up")
+    .panel
+      .panel-heading
+        = link_to(t('help.jingles.q2'), "#jingles_q2", class: "accordion-toggle", data: {parent: "#accordion", toggle: "collapse"})
+      .panel-collapse.collapse#jingles_q2
+        .panel-body.bg-light
+          = t('help.jingles.a2').html_safe
+          = icon_link(t('help.top'), {href: "#accordion", class: "pull-right btn btn-xxs btn-white m-t"}, "icon-arrow-up")
+    .panel
+      .panel-heading
+        = link_to(t('help.jingles.q3'), "#jingles_q3", class: "accordion-toggle", data: {parent: "#accordion", toggle: "collapse"})
+      .panel-collapse.collapse#jingles_q3
+        .panel-body.bg-light
+          = t('help.jingles.a3').html_safe
+          = icon_link(t('help.top'), {href: "#accordion", class: "pull-right btn btn-xxs btn-white m-t"}, "icon-arrow-up")
+    .panel
+      .panel-heading
+        = link_to(t('help.jingles.q4'), "#jingles_q4", class: "accordion-toggle", data: {parent: "#accordion", toggle: "collapse"})
+      .panel-collapse.collapse#jingles_q4
+        .panel-body.bg-light
+          = t('help.jingles.a4').html_safe
+          = icon_link(t('help.top'), {href: "#accordion", class: "pull-right btn btn-xxs btn-white m-t"}, "icon-arrow-up")
+    .panel
+      .panel-heading
+        = link_to(t('help.jingles.q5'), "#jingles_q5", class: "accordion-toggle", data: {parent: "#accordion", toggle: "collapse"})
+      .panel-collapse.collapse#jingles_q5
+        .panel-body.bg-light
+          = t('help.jingles.a5').html_safe
+          = icon_link(t('help.top'), {href: "#accordion", class: "pull-right btn btn-xxs btn-white m-t"}, "icon-arrow-up")
+    .panel
+      .panel-heading
+        = link_to(t('help.jingles.q6'), "#jingles_q6", class: "accordion-toggle", data: {parent: "#accordion", toggle: "collapse"})
+      .panel-collapse.collapse#jingles_q6
+        .panel-body.bg-light
+          = t('help.jingles.a6').html_safe
+          = icon_link(t('help.top'), {href: "#accordion", class: "pull-right btn btn-xxs btn-white m-t"}, "icon-arrow-up")
+          
+    
+    .panel.bg-info#mixer
+      .panel-body
+        %h4.m-n= t('help.browser.mixer').html_safe
+    .panel
+      .panel-heading
+        = link_to(t('help.mixer.q1'), "#mixer_q1", class: "accordion-toggle", data: {parent: "#accordion", toggle: "collapse"})
+      .panel-collapse.collapse#mixer_q1
+        .panel-body.bg-light
+          = t('help.mixer.a1').html_safe
+          = icon_link(t('help.top'), {href: "#accordion", class: "pull-right btn btn-xxs btn-white m-t"}, "icon-arrow-up")
+    .panel
+      .panel-heading
+        = link_to(t('help.mixer.q2'), "#mixer_q2", class: "accordion-toggle", data: {parent: "#accordion", toggle: "collapse"})
+      .panel-collapse.collapse#mixer_q2
+        .panel-body.bg-light
+          = t('help.mixer.a2').html_safe
+          = icon_link(t('help.top'), {href: "#accordion", class: "pull-right btn btn-xxs btn-white m-t"}, "icon-arrow-up")
+    .panel
+      .panel-heading
+        = link_to(t('help.mixer.q3'), "#mixer_q3", class: "accordion-toggle", data: {parent: "#accordion", toggle: "collapse"})
+      .panel-collapse.collapse#mixer_q3
+        .panel-body.bg-light
+          = t('help.mixer.a3').html_safe
+          = icon_link(t('help.top'), {href: "#accordion", class: "pull-right btn btn-xxs btn-white m-t"}, "icon-arrow-up")
+    
+    
+    .panel.bg-info#users
+      .panel-body
+        %h4.m-n= t('help.browser.users').html_safe
+    .panel
+      .panel-heading
+        = link_to(t('help.users.q1'), "#users_q1", class: "accordion-toggle", data: {parent: "#accordion", toggle: "collapse"})
+      .panel-collapse.collapse#users_q1
+        .panel-body.bg-light
+          = t('help.users.a1').html_safe
+          = icon_link(t('help.top'), {href: "#accordion", class: "pull-right btn btn-xxs btn-white m-t"}, "icon-arrow-up")
+    .panel
+      .panel-heading
+        = link_to(t('help.users.q2'), "#users_q2", class: "accordion-toggle", data: {parent: "#accordion", toggle: "collapse"})
+      .panel-collapse.collapse#users_q2
+        .panel-body.bg-light
+          = t('help.users.a2').html_safe
+          = icon_link(t('help.top'), {href: "#accordion", class: "pull-right btn btn-xxs btn-white m-t"}, "icon-arrow-up")
+    .panel
+      .panel-heading
+        = link_to(t('help.users.q3'), "#users_q3", class: "accordion-toggle", data: {parent: "#accordion", toggle: "collapse"})
+      .panel-collapse.collapse#users_q3
+        .panel-body.bg-light
+          = t('help.users.a3').html_safe
+          = icon_link(t('help.top'), {href: "#accordion", class: "pull-right btn btn-xxs btn-white m-t"}, "icon-arrow-up")
+    .panel
+      .panel-heading
+        = link_to(t('help.users.q4'), "#users_q4", class: "accordion-toggle", data: {parent: "#accordion", toggle: "collapse"})
+      .panel-collapse.collapse#users_q4
+        .panel-body.bg-light
+          = t('help.users.a4').html_safe
+          = icon_link(t('help.top'), {href: "#accordion", class: "pull-right btn btn-xxs btn-white m-t"}, "icon-arrow-up")
+    
+    
+    .panel.bg-info#general
+      .panel-body
+        %h4.m-n= t('help.browser.general').html_safe
+    .panel
+      .panel-heading
+        = link_to(t('help.general.q1'), "#general_q1", class: "accordion-toggle", data: {parent: "#accordion", toggle: "collapse"})
+      .panel-collapse.collapse#general_q1
+        .panel-body.bg-light
+          = t('help.general.a1').html_safe
+          = icon_link(t('help.top'), {href: "#accordion", class: "pull-right btn btn-xxs btn-white m-t"}, "icon-arrow-up")
+    .panel
+      .panel-heading
+        = link_to(t('help.general.q2'), "#general_q2", class: "accordion-toggle", data: {parent: "#accordion", toggle: "collapse"})
+      .panel-collapse.collapse#general_q2
+        .panel-body.bg-light
+          = t('help.general.a2').html_safe
+          = icon_link(t('help.top'), {href: "#accordion", class: "pull-right btn btn-xxs btn-white m-t"}, "icon-arrow-up")

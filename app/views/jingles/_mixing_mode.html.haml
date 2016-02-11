@@ -1,0 +1,24 @@
+.modal-dialog
+  .modal-content
+    .modal-header
+      %h4.modal-title.text-center= t('jingles.creating.title')
+    .modal-body
+      .generating_jingle
+        %i.icon-spinner.icon-spin
+      .did_you_know.well.bg-info
+        %h4= t('trivia.title')
+        = t("trivia.did_you_know.#{Extends::MixLoader::LOADING_MESSAGES.sample}")
+
+:javascript
+  $(document).ready(function() {
+    jingleInterval = setInterval(checkJingleStatus, 3000);
+    
+    function checkJingleStatus() {
+      $.get("#{check_status_jingle_path(jingle)}", function(data) {
+        console.log(data);
+        if (data != "Processing...") {
+          window.location = data;
+        }
+      });
+    }
+  });

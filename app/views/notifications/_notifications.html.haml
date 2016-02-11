@@ -1,0 +1,28 @@
+- title ||= title
+
+- if notifications.empty?
+  %section.panel.no-borders.hbox
+    %aside.bg-danger.clearfix.lter.r-r.text-right.v-middle
+      .wrapper.h3.font-thin
+        = t('search.index.no_results_head')
+    %aside
+      .pos-rlt
+        %span.arrow.left.hidden-xs
+        .panel-body                  
+          = t('users.notifications.index.empty')
+                
+- else
+  - if title
+    %h4.m= title
+  .col-lg-12
+    %ul.list-group.list-group-xs.list-group-sp
+      - previous_day = ""
+      - notifications.each do |notification|
+        - if notification.created_at.strftime("%m/%d/%Y").to_s != previous_day
+          %li.list-group-item.no-border.bg-dark
+            %span.label= notification.created_at.strftime("%B %d, %Y")
+        = render partial: "notification", locals: {notification: notification}
+        
+        - previous_day = notification.created_at.strftime("%m/%d/%Y").to_s
+
+= paginate(notifications)

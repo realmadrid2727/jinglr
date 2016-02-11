@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+%html{lang: "en", style: "overflow-x: visible;"}
+  %head
+    %meta{charset: "utf-8"}
+    %meta{name: "viewport", content: "width=device-width, initial-scale=1.0"}
+    %title
+      = content_for?(:title) ? yield(:title) + " &rsaquo; Jinglr".html_safe : "Jinglr"
+    = csrf_meta_tags
+    = stylesheet_link_tag "application", media: "all", "data-turbolinks-track" => true
+    = javascript_include_tag "application", "data-turbolinks-track" => true
+    - if @canonical
+      %link{rel: "canonical", href: "#{APP_CONFIG['url']}#{@canonical}"}
+    %meta{property: "og:image", content: "#{@og_image || asset_url('logofb.png')}"}
+    %meta{property: "og:url", content: "http://#{request.host+request.fullpath}"}
+    %meta{property: "og:title", content: "#{@og_title || content_for?(:title) ? yield(:title) + ' &rsaquo; Jinglr'.html_safe : 'Jinglr'}"}
+    %meta{property: "og:description", content: "#{@meta_description || 'Jinglr is a free collaborative songwriting web application. Add a track, mix with existing tracks, and create new music. What are you waiting for? Sign up today.'}"}
+    %meta{property: "og:type", content: "website"}
+    %meta{property: "fb:app_id", content: "#{APP_CONFIG['fb_app_id']}"}
+    %meta{property: "fb:admins", content: "#{APP_CONFIG['fb_admins']}"}
+  %body{data: {spy: "scroll", target: "#header"}, class: "landing", id: "home", style: "overflow-x: visible;"}
+    %header{id: "header", class: "navbar navbar-fixed-top bg-white affix", data: {spy: "affixs", 'offset-top' => "1"}}
+      .container
+        = link_to(image_tag(asset_path("logo-landing.png"), alt: t('header.jinglr')), root_path, class: "logo landing")
+        %button{type: "button", class: "navbar-toggle", data: {toggle: "collapse", target: "#nav"}}
+          %i.icon-reorder
+        .collapse.navbar-collapse#nav
+          %ul.nav.navbar-nav.navbar-right
+            %li= link_to(t('buttons.login'), login_path)
+            %li= link_to(t('buttons.register'), register_path)
+          /%ul.landing-nav.nav.navbar-nav.navbar-right
+          /  %li.hide= link_to(t('landing.header.home'), "#home", class: "nav-scroll")
+          /  %li= link_to(t('landing.header.about'), "#about", class: "nav-scroll")
+          /  %li= link_to(t('landing.header.newsletter'), "#contact", class: "nav-scroll")
+              
+              
+
+    = yield
+  
+    = render partial: "shared/analytics"

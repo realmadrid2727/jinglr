@@ -1,0 +1,41 @@
+.panel-body
+  %section.comment-list.block.scrollable.tracks.m-b{style: "max-height: 200px;"}
+    - if jingle.has_origins?
+      - jingle.origins.each do |origin|
+        = render partial: "jingle_comments/origins", locals: {origin: origin}
+    - if jingle.has_children?
+      = render partial: "jingle_comments/original_track", locals: {jingle: jingle}
+      - if can_edit?(jingle)
+        - jingle.jingles.pending.each do |track|
+          = render partial: "jingle_comments/pending_track", locals: {jingle: track}
+      - elsif user_signed_in? && !can_edit?(jingle)
+        - jingle.pending_child_jingles_for(current_user).each do |track|
+          = render partial: "jingle_comments/pending_track", locals: {jingle: track}
+      
+      - jingle.jingles.merged.each do |track|
+        = render partial: "jingle_comments/track", locals: {jingle: track}
+    - else
+      %strong.text-muted.text-xs= t('jingles.tracks.empty')
+        
+  %ul.nav.nav-pills
+    %li= icon_link(t('buttons.collaborate'), {href: new_jingle_track_jingle_path(jingle), class: "bg-light lt"}, "icon-plus m-r-xs")
+    %li= icon_link(t('buttons.mixer'), {href: "#", class: "add-to-mixer bg-light lt"}, "icon-beaker m-r-xs")
+      
+
+- if user_signed_in?
+  :javascript
+    $(document).ready(function() {
+      $(".add-to-mixer").click(function(e) {
+        e.preventDefault();
+        $("#jingle_#{jingle.id} section .track-img").effect("transfer", { to: "#track-mixer span:last-child" }, 250);
+
+        $.ajax({
+          url: "#{mixer_add_track_remote_mixer_index_path}",
+          data: "jingle_id=#{jingle.id}",
+          type: "PUT",
+          context: document.body
+        }).success(function(data) {
+          $("#track-mixer").append(data);
+        });
+      });
+    });

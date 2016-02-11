@@ -1,0 +1,29 @@
+%section.panel.m-b-sm
+  .panel-body
+    = link_to(image_tag(follower.avatar.url(:small), alt: follower.display_name, class: "img-circle"), profile_path(follower.username), class: "thumb-sm pull-left m-r")
+    .pull-left
+      = icon_link(follower.display_name, {href: profile_path(follower.username), class: "text-info"}, "icon-eye-open")
+      %small.text-muted (@#{follower.username})
+      
+      %small.block.text-muted
+        = pluralize(follower.followers_count, t('profiles.show.labels.follower'))
+      %small.block.text-muted
+        = pluralize(follower.jingles_count, t('profiles.show.labels.jingle'))
+        
+    .pull-right
+      - unless follower == current_user
+        - if user_signed_in?
+          %a.btn.btn-success.btn-rounded.btn-xs{href: toggle_follow_path(follower.username),
+            data: {toggle: "button", method: :post, remote: :true},
+            class: "#{current_user.follows?(follower) ? 'active' : ''}"}
+            %span.text
+              %i.icon-bullhorn
+              = t('profiles.show.labels.follow')
+            %span.text-active
+              %i.icon-remove
+              = t('profiles.show.labels.unfollow')
+        - else
+          %a.btn.btn-success.btn-rounded{href: register_path, data: {toggle: "button"}}
+            %span.text-active
+              %i.icon-bullhorn
+              = t('buttons.register')

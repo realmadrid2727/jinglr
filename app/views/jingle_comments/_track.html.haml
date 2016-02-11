@@ -1,0 +1,16 @@
+%article.comment-item.comment-reply{id: "track_reply_#{jingle.id}"}
+  = link_to(image_tag(jingle.user.avatar(:small), alt: "", class: "img-circle"), profile_path(jingle.user.username), class: "thumb-sm pull-left")
+  
+  %span.arrow.left
+  %section.comment-body.panel.panel.text-sm
+    .panel-body
+      %strong
+        = t('jingles.tracks.added', added_by: link_to(jingle.user.display_name, profile_path(jingle.user.username)), track_by: link_to(jingle.user.display_name, profile_path(jingle.user.username))).html_safe
+      %span.text-muted.m-l-sm.pull-right.date
+        %o.icon-time
+        = link_to(show_time(jingle.created_at), jingle_path(jingle))
+      .block
+        %a.jp-play.btn.btn-xs.btn-info{href: jingle.track.url, id: "play_track_#{jingle.id}", data: {target: "track_#{jingle.id}", waveform: jingle.waveform_url, duration: jingle.track_duration}}
+          %i.icon-play
+        = hashtag_auto_link(jingle.desc)
+      

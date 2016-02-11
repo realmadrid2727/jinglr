@@ -1,0 +1,17 @@
+.panel.bg-light
+  .panel-body
+    = t('site.leave_feedback.preamble')
+
+= form_tag leave_feedback_create_path, id: "new_site_feedback_form", data: {remote: true, method: :post, type: "json"} do
+  .form-group
+    = select_tag "category_id", options_from_collection_for_select(SiteFeedbackCategory.all.sort_by(&:name), :id, :name)
+  .form-group
+    = text_area_tag "desc", nil, class: "form-control input-xl text-sm maxlength", placeholder: t('placeholders.add_comment'), autocomplete: "off", id: "site_feedback_desc"
+
+:javascript
+  $(document).ready(function() {
+    $(".modal-submit").on('click', function(e) {
+      e.preventDefault();
+      $("#new_site_feedback_form").submit();
+    });
+  });

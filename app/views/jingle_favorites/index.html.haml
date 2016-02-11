@@ -1,0 +1,14 @@
+- content_for :title do
+  = t('users.favorites.index.title')
+
+- content_for :browser do
+  .list-group.bg-white
+    %span.bg-dark.list-group-item= t('users.index.browser.title')
+    = icon_link(t('users.index.browser.jingles'), {href: home_path, class: "list-group-item"}, "icon-music m-r-xs")
+    = icon_link(t('users.index.browser.view'), {href: profile_path(current_user.username), class: "list-group-item"}, "icon-eye-open m-r-xs")
+    = icon_link(t('users.index.browser.edit'), {href: edit_user_path(current_user), class: "list-group-item"}, "icon-pencil m-r-xs")
+    = icon_link(t('users.index.browser.notifications'), {href: notifications_user_index_path, class: "list-group-item"}, "icon-bell m-r-xs")
+    = icon_link(t('users.index.browser.favorites'), {href: favorites_user_index_path, class: "list-group-item active"}, "icon-heart m-r-xs")
+      
+.infinite-page.scrollable#infinite
+  = render partial: "jingles/jingles", locals: {jingles: @favorites, title: t('users.favorites.index.title')}

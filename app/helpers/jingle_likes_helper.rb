@@ -1,0 +1,2 @@
+module JingleLikesHelper
+end

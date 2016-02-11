@@ -1,0 +1,21 @@
+- content_for :title do
+  = t('search.index.title')
+
+- content_for :header do
+  %li{class: "#{'active' unless params[:sort]}"}= link_to(t('jingles.index.header.new'), search_path(params[:q]))
+  %li{class: "#{'active' if params[:sort] == 'likes'}"}= link_to(t('jingles.index.header.most_likes'), sorted_search_path(params[:q], :likes))
+  %li{class: "#{'active' if params[:sort] == 'favorites'}"}= link_to(t('jingles.index.header.most_favorites'), sorted_search_path(params[:q], :favorites))
+
+- content_for :browser do
+  .list-group.bg-white
+    %span.bg-info.list-group-item= t('jingles.index.browser.title')
+    - @hashtags.each do |tag|
+      %a{href: hashtag_path(tag.name), class: "list-group-item", id: "tag_#{tag.id}"}
+        .badge= tag.count
+        = hashtag_format(tag.name)
+
+.infinite-page.scrollable#infinite
+  = render partial: "jingles/jingles", locals: {jingles: @jingles, search: true,
+    search_title: t('search.index.results', count: pluralize(@jingles.length, t('search.index.labels.result'))),
+    search_term: params[:q]}
+

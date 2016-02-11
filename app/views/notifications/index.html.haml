@@ -1,0 +1,64 @@
+- content_for :title do
+  = t('users.notifications.index.title')
+
+- content_for :header do
+  %li.active= link_to(t('users.notifications.header.notifications'), "#notifications", id: "notifications_button", data: {toggle: "tab"})
+  %li= link_to(t('users.notifications.header.settings'), "#settings", id: "settings_button", data: {toggle: "tab"})
+  
+  
+- content_for :browser do
+  .list-group.bg-white
+    %span.bg-dark.list-group-item= t('users.index.browser.title')
+    = icon_link(t('users.index.browser.jingles'), {href: home_path, class: "list-group-item"}, "icon-music m-r-xs")
+    = icon_link(t('users.index.browser.view'), {href: profile_path(current_user.username), class: "list-group-item"}, "icon-eye-open m-r-xs")
+    = icon_link(t('users.index.browser.edit'), {href: edit_user_path(current_user), class: "list-group-item"}, "icon-pencil m-r-xs")
+    = icon_link(t('users.index.browser.notifications'), {href: notifications_user_index_path, class: "list-group-item active"}, "icon-bell m-r-xs")
+    = icon_link(t('users.index.browser.favorites'), {href: favorites_user_index_path, class: "list-group-item"}, "icon-heart m-r-xs")
+      
+.abox.tab-content
+  %a#notifications_button{name: "notifications"}
+  #notifications.tab-pane.active
+    .infinite-page.scrollable#infinite
+      = render partial: "notifications", locals: {notifications: notifications, title: t('users.notifications.index.title')}
+
+  %a#settings_button{name: "settings"}
+  #settings.tab-pane
+    .col-xs-12.m-t
+      = render partial: "shared/beta", locals: {text: t('beta.notifications.settings')}
+      %section.panel.no-borders.hbox
+        %aside.bg-info.clearfix.lter.r-r.text-right.v-middle#settings_alerts.message_box
+          .wrapper.h3.font-thin
+            = t('users.notifications.captions.settings')
+        %aside.settings
+          .pos-rlt
+            %span.arrow.left.hidden-xs
+            .panel-body
+              = form_tag update_settings_notification_path, class: "form-horizontal remote_submit_form",
+                method: :put, remote: true, id: "notification_settings", data: {errorbox: "#settings_alerts", alerts: "off"} do
+                %h4= t('users.notifications.settings.user_jingles')
+                .line.line-dashed.line-lg.pull-in
+                - NotificationSetting.user_jingles_field_list.each do |field|
+                  .form-group
+                    %label.switch.col-sm-2
+                      %input.submit-notification-settings{type: "checkbox", id: "notification_setting_#{field}",
+                        name: "notification_settings[#{field}]", checked: current_user.notification_setting.send(field) ? true : false}
+                      %span
+                    %label.control-label.col-sm-10.text-left{for: "notification_setting_#{field}"}
+                      = t("users.notifications.settings.#{field}")
+                .line.line-dashed.line-lg.pull-in
+                %h4= t('users.notifications.settings.jingles')
+                .line.line-dashed.line-lg.pull-in
+                - NotificationSetting.jingles_field_list.each do |field|
+                  .form-group
+                    %label.switch.col-sm-2
+                      %input.submit-notification-settings{type: "checkbox", id: "notification_setting_#{field}",
+                        name: "notification_settings[#{field}]", checked: current_user.notification_setting.send(field) ? true : false}
+                      %span
+                    %label.control-label.col-sm-10.text-left{for: "notification_setting_#{field}"}
+                      = t("users.notifications.settings.#{field}")
+
+:javascript
+  $(document).ready(function() {
+    var hash = window.location.hash;
+    $(hash+"_button").trigger("click");
+  });

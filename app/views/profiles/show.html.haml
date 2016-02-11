@@ -1,0 +1,13 @@
+- content_for :title do
+  = t('profiles.show.title', user: user.display_name)
+
+- content_for :header do
+  %li.active= link_to(t('profiles.show.label.jingles'), profile_path(user.username))
+  %li= link_to(t('profiles.show.label.followers'), profile_followers_path(user.username))
+  %li= link_to(t('profiles.show.label.following'), profile_following_path(user.username))
+
+- content_for :browser do
+  = render partial: "overview"
+  
+.infinite-page.scrollable#infinite
+  = render partial: "jingles/jingles", locals: {jingles: jingles, title: t('profiles.show.labels.jingles')}

@@ -1,0 +1,92 @@
+%section.panel.panel-short.draggable{data: {path: mixer_add_track_remote_mixer_index_path, jingle: jingle.id}}
+  - if jingle.waveform_url
+    .track-img.jp-seek-bar
+      .progress
+      = image_tag(jingle.waveform_url)
+  - else
+    .track-img.jp-seek-bar{id: "track_img_#{jingle.id}"}
+      .progress
+
+    %i.icon-spinner.icon-spin.absolute{id: "spinner_#{jingle.id}"}
+      
+  .panel-body
+    .clearfix
+      %small.text-muted.pull-right.date
+        %o.icon-time
+        = link_to(show_time(jingle.latest_at), jingle_path(jingle))
+      = link_to(image_tag(jingle.user.avatar(:small), alt: "", class: "img-circle"), profile_path(jingle.user.username), class: "thumb-sm pull-left m-r")
+      .user-details
+        %a{href: profile_path(jingle.user.username)}
+          %strong= jingle.user.display_name
+          
+      %a.jp-play.btn.btn-xs.btn-info.pull-left{href: jingle.latest_url, id: "play-btn_#{jingle.id}", data: {target: "track_#{jingle.id}", id: jingle.id, duration: jingle.track_duration, waveform: jingle.waveform_url}}
+        %i.icon-play
+      .pull-left.col-sm-9.jingle-desc= hashtag_auto_link(jingle.desc)
+      
+
+%section.panel.m-b-none
+  %header.panel-heading.bg-light
+    %ul.nav.nav-tabs.nav-justify.bg-gradient.bg-light
+      %li{class: "#{'active' if params[:open] == 'tracks'}"}
+        %a.realign-grid.ajax-tab{href: tracks_jingle_contributions_path(jingle), id: "collaborations_count_#{jingle.id}", data: {toggle: "tab", target: "#collaborations_#{jingle.id}"}}
+          %i.icon-music
+          /= pluralize(jingle.jingle_tracks_count, t('jingles.jingle.collaboration'))
+          %span= jingle.jingle_tracks_count
+      %li{class: "#{'active' if params[:open] == 'comments'}"}
+        %a.realign-grid.ajax-tab{href: comments_jingle_contributions_path(jingle), id: "comments_count_#{jingle.id}", data: {toggle: "tab", target: "#comments_#{jingle.id}"}}
+          %i.icon-comments
+          /= pluralize(jingle.jingle_comments_count, t('jingles.jingle.comment'))
+          %span= jingle.jingle_comments_count
+      %li
+        %a.realign-grid{href: "javascript:void", id: "options_tab_#{jingle.id}", data: {toggle: "tab", target: "#options_#{jingle.id}"}}
+          %i.icon-gear
+          
+    
+    .comment-action.m-t-sm.pull-right
+      - if user_signed_in?
+        %a.btn.btn-white.btn-xs.like-submit-ajax{href: toggle_jingle_likes_path(jingle),
+          title: t('jingles.jingle.like'), data: {toggle: "class", remote: "true", method: :post, jingle: jingle.id},
+          class: ('active' if jingle.liked_by?(current_user))}
+          %i.icon-thumbs-up.text-muted.text
+          %i.icon-thumbs-up.text-info.text-active
+          %span{id: "likes_count_#{jingle.id}"}= jingle.jingle_likes_count
+        - unless can_edit?(jingle)
+          %a.btn.btn-white.btn-xs.favorite{href: toggle_jingle_favorites_path(jingle),
+            title: t('jingles.jingle.favorite'), data: {toggle: "class", remote: "true", method: :post},
+            class: ('active' if jingle.favorited_by?(current_user))}
+            %i.icon-heart.text-muted.text
+            %i.icon-heart.text-info.text-active
+          %a.btn.btn-white.btn-xs.follow.follow-jingle-submit-ajax{href: toggle_follow_jingle_path(jingle),
+            title: t('jingles.jingle.follow'), data: {toggle: "class", remote: "true", method: :post, type: "json"},
+            class: ('active' if current_user.following?(jingle))}
+            %i.icon-bullhorn.text-muted.text
+            %i.icon-bullhorn.text-info.text-active
+            
+          
+  .tab-content
+    .tab-pane{id: "collaborations_#{jingle.id}", class: "#{'active' if params[:open] == 'tracks'}"}
+              
+    .tab-pane{id: "comments_#{jingle.id}", class: "#{'active' if params[:open] == 'comments'}"}
+          
+    .tab-pane{id: "options_#{jingle.id}"}
+      .panel-body
+        %ul.nav.nav-pills
+          - if jingle.has_parent? && jingle.merged_with?(jingle.parent)
+            %li= icon_link(t('buttons.view_parent'), {href: open_jingle_path(jingle.parent, "tracks")}, "icon-code-fork")
+          - if 1 == 2 # If user can tweet
+            %li= icon_link(t('buttons.services.tweet'), {href: "#"}, "icon-twitter")
+          - if user_signed_in? && can_edit?(jingle)
+            %li= icon_link(t('buttons.delete'), {href: jingle_path(jingle), data: {method: :delete, remote: :true, confirm: t('confirm.delete', item: t('models.jingle'))}, class: "text-danger"}, "icon-trash")
+          %li= icon_link(t('audio_player.view_jingle'), {href: jingle_path(jingle)}, "icon-eye-open")
+            
+
+- if params[:open] == 'comments'
+  :javascript
+    $(document).ready(function() {
+      $("#comments_count_#{jingle.id}").trigger("click");
+    });
+- if params[:open] == 'tracks'
+  :javascript
+    $(document).ready(function() {
+      $("#collaborations_count_#{jingle.id}").trigger("click");
+    });

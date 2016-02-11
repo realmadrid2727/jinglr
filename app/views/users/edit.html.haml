@@ -1,0 +1,127 @@
+- content_for :title do
+  = t('users.edit.title')
+
+- content_for :header do
+  %li.active= link_to(t('users.edit.header.profile'), "#profile", data: {toggle: "tab"})
+  %li= link_to(t('users.edit.header.account'), "#account", data: {toggle: "tab"})
+  %li= link_to(t('users.edit.header.more'), "#more", data: {toggle: "tab"})
+  
+- content_for :browser do
+  .list-group.bg-white
+    %span.bg-dark.list-group-item= t('users.index.browser.title')
+    = icon_link(t('users.index.browser.jingles'), {href: home_path, class: "list-group-item"}, "icon-music m-r-xs")
+    = icon_link(t('users.index.browser.view'), {href: profile_path(current_user.username), class: "list-group-item"}, "icon-eye-open m-r-xs")
+    = icon_link(t('users.index.browser.edit'), {href: edit_user_path(current_user), class: "list-group-item active"}, "icon-pencil m-r-xs")
+    = icon_link(t('users.index.browser.notifications'), {href: notifications_user_index_path, class: "list-group-item"}, "icon-bell m-r-xs")
+    = icon_link(t('users.index.browser.favorites'), {href: favorites_user_index_path, class: "list-group-item"}, "icon-heart m-r-xs")
+
+    
+.abox.tab-content
+  %a{name: "profile"}
+  #profile.tab-pane.active
+    .col-xs-12.m-t
+      %section.panel.no-borders.hbox
+        %aside.bg-dark.clearfix.lter.r-r.text-right.v-middle.message_box#avatar_alerts
+          .wrapper.h3.font-thin
+            = t('users.edit.captions.avatar')
+        %aside
+          .pos-rlt
+            %span.arrow.left.hidden-xs
+            .panel-body                  
+              .clearfix.text-center.m-t
+                .inline
+                  .user-avatar
+                    .thumb-lg
+                      = image_tag(current_user.avatar.url(:small), alt: "", class: "img-circle", id: "user_avatar_img")
+                    = render partial: "file_upload"
+    .col-xs-12
+      %section.panel.no-borders.hbox
+        %aside.bg-info.clearfix.lter.r-r.text-right.v-middle.message_box#details_alerts
+          .wrapper.h3.font-thin
+            = t('users.edit.captions.details')
+        %aside
+          .pos-rlt
+            %span.arrow.left.hidden-xs
+            .panel-body                  
+              = form_tag user_detail_path(current_user, current_user_details), class: "form-horizontal remote_submit_form",
+                method: :put, data: {errorbox: "#details_alerts", remote: true, type: "json"} do
+                .form-group
+                  %label.col-sm-4.control-label{for: "user_detail_name"}= t('users.edit.labels.name')
+                  .col-sm-8
+                    = text_field_tag "user_detail[name]", current_user_details.name, class: "bg-focus form-control"
+                .form-group
+                  %label.col-sm-4.control-label{for: "user_detail_location"}= t('users.edit.labels.location')
+                  .col-sm-8
+                    = text_field_tag "user_detail[location]", current_user_details.location, class: "bg-focus form-control"
+                .form-group
+                  %label.col-sm-4.control-label{for: "user_detail_website"}= t('users.edit.labels.website')
+                  .col-sm-8
+                    = text_field_tag "user_detail[website]", current_user_details.website, class: "bg-focus form-control"
+                .form-group
+                  %label.col-sm-4.control-label{for: "user_details_bio"}= t('users.edit.labels.bio')
+                  .col-sm-8
+                    = text_area_tag "user_detail[bio]", current_user_details.bio, class: "bg-focus form-control", maxlength: 200
+                .form-group
+                  %button{class: "btn btn-success pull-right m-r", type: "submit"}= t('buttons.save')
+                          
+                        
+  %a{name: "account"}
+  #account.tab-pane
+    .col-xs-12.m-t
+      %section.panel.no-borders.hbox
+        %aside.bg-warning.clearfix.lter.r-r.text-right.v-middle.message_box#password_alerts
+          .wrapper.h3.font-thin
+            = t('users.edit.captions.password')
+        %aside
+          .pos-rlt
+            %span.arrow.left.hidden-xs
+            .panel-body                  
+              = form_tag update_password_user_path(current_user), class: "form-horizontal remote_submit_form",
+                method: :put, data: {errorbox: "#password_alerts", remote: true, type: "json"} do
+                .form-group
+                  %label.col-sm-4.control-label{for: "user_current_password"}= t('users.edit.labels.current_password')
+                  .col-sm-8
+                    = password_field_tag "user[current_password]", nil, class: "bg-focus form-control"
+                .form-group
+                  %label.col-sm-4.control-label{for: "user_password"}= t('users.edit.labels.new_password')
+                  .col-sm-8
+                    = password_field_tag "user[password]", nil, class: "bg-focus form-control"
+                .form-group
+                  %label.col-sm-4.control-label{for: "user_password_confirmation"}= t('users.edit.labels.password_confirm')
+                  .col-sm-8
+                    = password_field_tag "user[password_confirmation]", nil, class: "bg-focus form-control"
+                    
+                .form-group
+                  %button{class: "btn btn-success pull-right m-r", type: "submit"}= t('buttons.save')
+        
+    .col-xs-12
+      %section.panel.no-borders.hbox
+        %aside.bg-primary.clearfix.lter.r-r.text-right.v-middle.message_box#email_alerts
+          .wrapper.h3.font-thin
+            = t('users.edit.captions.email')
+        %aside
+          .pos-rlt
+            %span.arrow.left.hidden-xs
+            .panel-body                  
+              = form_tag update_email_user_path(current_user), class: "form-horizontal remote_submit_form",
+                method: :put, data: {errorbox: "#email_alerts", remote: true, type: "json"} do
+                .form-group
+                  %label.col-sm-4.control-label{for: "user_email"}= t('users.edit.labels.email')
+                  .col-sm-8
+                    = text_field_tag "user[email]", current_user.email, class: "bg-focus form-control"
+                .form-group
+                  %button{class: "btn btn-success pull-right m-r", type: "submit"}= t('buttons.save')
+                
+  %a{name: "more"}
+  #more.tab-pane
+    .col-xs-12.m-t
+      %section.panel.no-borders.hbox
+        %aside.bg-danger.clearfix.lter.r-r.text-right.v-middle.message_box
+          .wrapper.h3.font-thin
+            = t('users.edit.captions.delete')
+        %aside
+          .pos-rlt
+            %span.arrow.left.hidden-xs
+            .panel-body                  
+              = link_to(t('buttons.delete_account'), "#", class: "btn btn-danger btn-lg")
+              = link_to(t('delete_account.plead'), "#", class: "btn btn-link btn-sm")

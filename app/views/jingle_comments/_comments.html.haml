@@ -1,0 +1,22 @@
+.panel-body
+  %section.comment-list.block.scrollable{style: "max-height: 200px;"}
+    - unless jingle.comments.blank?
+      - jingle.comments.each do |comment|
+        = render partial: "jingle_comments/comment", locals: {comment: comment}
+    - else
+      %article.comment-item{style: "display: none;"}
+  %footer.panel-footer.pos-rlt.no-border
+    - if user_signed_in?
+      %span.arrow.top
+      = form_tag jingle_contributions_path(jingle), class: "pull-out comment-submit-ajax", data: {jingle: jingle.id}, method: :post, remote: "true" do
+        = text_field_tag "jingle_comment[desc]", nil, class: "form-control input-lg text-sm maxlength", placeholder: t('placeholders.add_comment'), maxlength: "200", autocomplete: "off", id: "jingle_comment_desc_#{jingle.id}"
+        %span.error_message.bg-danger.label
+    - else
+      = t('jingle_comments.login_or_register',
+        login: link_to(t('buttons.login'), login_path, class: "btn btn-primary btn-xs"),
+        register: link_to(t('buttons.register'), register_path, class: "btn btn-default btn-xs")).html_safe
+
+:javascript
+  $(document).ready(function() {
+    $("#jingle_comment_desc_#{jingle.id}").lilCharacterCount();
+  });

@@ -1,0 +1,14 @@
+- prev_notification = notification.prev_notification
+%a.notification.notification_status{href: mark_notification_viewed_path(notification),
+  title: t('users.notifications.mark_single'), id: "notification_status_#{notification.id}",
+  data: {toggle: "class", remote: "true", method: :put, id: "#notification_#{notification.id}",
+  prev: prev_notification ? remote_notification_path(prev_notification) : 0}}
+  %i.icon-check-empty.text-muted.text
+  %i.icon-check.text-success.text-active
+    
+%a.media.list-group-item.bg-white{href: notification.url, id: "notification_#{notification.id}"}
+  %span.pull-left.thumb-sm-2
+    = image_tag(notification.notifier.avatar(:small), alt: notification.notifier.display_name, class: "img-circle")
+  %span.media-body.block.m-b-none
+    %span.block= notification.desc
+    %small.text-muted= show_time(notification.created_at)

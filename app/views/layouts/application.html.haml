@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+%html{lang: "en"}
+  %head
+    %meta{charset: "utf-8"}
+    %meta{name: "viewport", content: "width=device-width, initial-scale=1.0"}
+    %title
+      = content_for?(:title) ? yield(:title) + " &rsaquo; Jinglr".html_safe : "Jinglr"
+    = csrf_meta_tags
+    = stylesheet_link_tag "application", media: "all", "data-turbolinks-track" => true
+    = javascript_include_tag "application", "data-turbolinks-track" => true
+    - if @canonical
+      %link{rel: "canonical", href: "#{APP_CONFIG['url']}#{@canonical}"}
+    %meta{property: "og:image", content: "#{@og_image || asset_url('logofb.png')}"}
+    %meta{property: "og:url", content: "http://#{request.host+request.fullpath}"}
+    %meta{property: "og:title", content: "#{@og_title || content_for?(:title) ? yield(:title) + ' &rsaquo; Jinglr'.html_safe : 'Jinglr'}"}
+    %meta{property: "og:description", content: "#{@meta_description || 'Jinglr is a free collaborative songwriting web application. Add a track, mix with existing tracks, and create new music. What are you waiting for? Sign up today.'}"}
+    %meta{property: "og:type", content: "website"}
+    %meta{property: "fb:app_id", content: "#{APP_CONFIG['fb_app_id']}"}
+    %meta{property: "fb:admins", content: "#{APP_CONFIG['fb_admins']}"}
+  %body
+    %section.hbox.stretch
+      %aside.bg-dark.aside-sm.nav-vertical#nav
+        %section.vbox
+        
+          %header.dker.nav-bar
+            %a.btn.btn-link.visible-xs{data: {toggle: "class:nav-off-screen", target:"body"}}
+              %i.icon-reorder
+            = link_to(image_tag(asset_path("logo.png"), alt: t('header.jinglr')), root_path, class: "logo")
+            %a.btn.btn-link.visible-xs{data: {toggle: "class:show", target: ".nav-user"}}
+              %i.icon-comment-alt
+          /%footer.footer.bg-gradient.hidden-xs
+          /  %a.btn.btn-sm.btn-link.m-r-n-xs.pull-right{href: "/lock", data: {toggle: "ajaxModal"}}
+          /    %i.icon-off
+          /  %a.btn.btn-sm.btn-link.m-l-n-sm{href: "#nav", data: {toggle: "class:nav-vertical"}}
+          /    %i.icon-reorder
+              
+          %section
+            = render partial: "shared/menu"
+
+            /.bg-danger.wrapper.hidden-vertical.animated.rollIn.text-sm            
+            /  %a.pull-right.m-r-n-sm.m-t-n-sm{href: "#", data: {dismiss: "alert"}}
+            /    %i.icon-close.icon-remove
+            /  = link_to("Would you like to learn more?", "#")
+
+      %section#content
+        %section.vbox
+          = render partial: "shared/header"
+          %section.scrollable.wrapper
+            .row
+              %section.scrollable
+                %section.hbox.stretch
+                  = render partial: "shared/browser"
+                  
+                  %aside.col-md-9.col-lg-9.full-height
+                    = render partial: "shared/flash_messages"
+                    = yield
+                  
+        = link_to("", "#", class: "hide nav-off-screen-block", data: {toggle: "class:nav-off-screen", target: "body"})
+        
+    #loading.bg-black.label{style: "display: none;"}
+      %i.icon-spinner.icon-spin
+      = t('loading')
+  
+    = render partial: "shared/analytics"

@@ -1,0 +1,9 @@
+.header.navbar .navbar-nav.search-navbar {
+  /*margin-right: 15px !important;*/
+}
+.search-bar {
+  padding: 0 !important;
+}
+.search-fix {
+  margin-top: 4px;
+}

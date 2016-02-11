@@ -1,0 +1,53 @@
+.clearfix.m-b
+  = link_to(image_tag(user.avatar.url(:small), alt: user.display_name, class: "img-circle"), user.avatar.url, class: "pull-left thumb m-r")
+  .pull-left
+    .h4.m-t-xs.m-b-xs= user.display_name
+    - unless user.detail.location.blank?
+      %small.text-muted
+        %i.icon-map-marker
+        = user.detail.location
+.panel.wrapper
+  .row
+    .col-xs-4
+      %a{href: profile_path(user.username)}
+        %span.m-b-xs.h4.block= user.jingles_count
+        %small.text-muted= user.jingles_count == 0 || user.jingles_count > 1 ? t('profiles.show.labels.jingles') : t('profile.show.labels.jingle')
+    .col-xs-4
+      %a{href: profile_followers_path(user.username)}
+        %span.m-b-xs.h4.block{class: "follows_count_#{user.id}"}= user.followers_count_cache
+        %small.text-muted= user.followers_count_cache == 0 || user.followers_count_cache > 1 ? t('profiles.show.labels.followers') : t('profile.show.labels.follower')
+    .col-xs-4
+      %a{href: profile_following_path(user.username)}
+        %span.m-b-xs.h4.block= user.following_count_cache
+        %small.text-muted= t('profiles.show.labels.following')
+.btn-group.btn-group-justified.m-b
+  - unless user == current_user
+    - if user_signed_in?
+      %a.btn.btn-success.btn-rounded.follow-submit-ajax{href: toggle_follow_path(user.username),
+        data: {toggle: "button", method: :post, remote: :true, user: user.id},
+        class: "#{current_user.follows?(user) ? 'active' : ''}"}
+        %span.text
+          %i.icon-bullhorn
+          = t('profiles.show.labels.follow')
+        %span.text-active
+          %i.icon-remove
+          = t('profiles.show.labels.unfollow')
+    - else
+      %a.btn.btn-success.btn-rounded{href: register_path}
+        %span.text
+          %i.icon-bullhorn
+          = t('profiles.show.labels.follow')
+        
+%div
+  - unless user.detail.bio.blank?
+    %small.text-uc.text-xs.text-muted= t('profiles.show.labels.bio')
+    %p= user.detail.bio
+    .line
+  /%small.text-uc.text-xs.text-muted= t('profiles.show.labels.connect')
+  /%p.m-t-sm
+  /  %a.btn.btn-rounded.btn-twitter.btn-icon{href: "#"}
+  /    %i.icon-twitter
+  /  %a.btn.btn-rounded.btn-facebook.btn-icon{href: "#"}
+  /    %i.icon-facebook
+  /  %a.btn.btn-rounded.btn-gplus.btn-icon{href: "#"}
+  /    %i.icon-google-plus

@@ -1,0 +1,45 @@
+%article.comment-item.comment-reply{id: "track_reply_#{jingle.id}"}
+  = link_to(image_tag(jingle.user.avatar(:small), alt: "", class: "img-circle"), profile_path(jingle.user.username), class: "thumb-sm pull-left")
+  
+  %span.arrow.left
+  %section.comment-body.panel.panel.text-sm.bg-light
+    .panel-body
+      - if can_edit?(jingle.parent)
+        %strong.user
+          = link_to(jingle.user.display_name, profile_path(jingle.user.username))
+          %span= t('jingles.tracks.pending')
+        = icon_link(t('buttons.bno'), {href: confirm_decline_merge_jingle_path(jingle), class: "btn btn-danger btn-sm decline-merge-ajax removeable", data: {toggle: 'ajaxModal'}}, "icon-remove")
+        = icon_link(t('buttons.byes'), {href: accept_merge_jingle_path(jingle), class: "btn btn-success btn-sm accept-merge-ajax removeable", data: {method: :put, remote: true, type: "json"}}, "icon-ok")
+
+      - elsif user_signed_in? && !can_edit?(jingle.parent)
+        %strong.user= t('jingles.tracks.pending_sent', user: link_to(jingle.parent.user.display_name, profile_path(jingle.parent.user.username))).html_safe
+        
+      %span.text-muted.m-l-sm.pull-right.date
+        %o.icon-time
+        = link_to(show_time(jingle.created_at), jingle_path(jingle))
+      
+      .jquery_jplayer{id: "track_#{jingle.id}"}
+      %a.jp-play.btn.btn-xs.btn-info{href: jingle.parent.merge_url(jingle), id: "play_track_#{jingle.id}", data: {target: "track_#{jingle.id}"}}
+        %i.icon-play
+      = hashtag_auto_link(jingle.desc)
+
+      /:javascript
+      /  track_#{jingle.id}_json = {
+      /    id: #{jingle.id},
+      /    href: "#{jingle.track.url}"
+      /  }
+
+:javascript
+  $(document).ready(function() {
+    $('[data-toggle="ajaxModal"]').on('click',
+      function(e) {
+        e.preventDefault();
+        var $this = $(this)
+          , $remote = $this.attr('href') || $this.data('remote')
+          , $modal = $('<div class="modal fade in" id="ajaxModal"><div class="modal-body"></div></div>');
+        $('body').append($modal);
+        $modal.modal();
+        $modal.load($remote);
+      }
+    );
+  });

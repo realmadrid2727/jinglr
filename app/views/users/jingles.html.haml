@@ -1,0 +1,22 @@
+- content_for :title do
+  = t('users.jingles.title')
+
+- content_for :header do
+  = render partial: "users/tour/jingles"
+
+- content_for :browser do
+  .list-group.bg-white
+    %span.bg-dark.list-group-item= t('users.index.browser.title')
+    = icon_link(t('users.index.browser.jingles'), {href: home_path, class: "list-group-item active"}, "icon-music m-r-xs")
+    = icon_link(t('users.index.browser.view'), {href: profile_path(current_user.username), class: "list-group-item"}, "icon-eye-open m-r-xs")
+    = icon_link(t('users.index.browser.edit'), {href: edit_user_path(current_user), class: "list-group-item"}, "icon-pencil m-r-xs")
+    = icon_link(t('users.index.browser.notifications'), {href: notifications_user_index_path, class: "list-group-item"}, "icon-bell m-r-xs")
+    = icon_link(t('users.index.browser.favorites'), {href: favorites_user_index_path, class: "list-group-item"}, "icon-heart m-r-xs")
+      
+.infinite-page.scrollable#infinite
+  = render partial: "jingles/jingles", locals: {jingles: user_jingles, title: t('users.jingles.title')}
+  - if user_jingles.blank?
+    .col-lg-12
+      .alert.alert-info
+        %i.icon-info-sign
+        = t('users.jingles.empty', discover: link_to(t('users.jingles.empty_link'), new_remote_jingles_path('remote'), class: "alert-link", data: {toggle: "ajaxModal", modalclass: "new_jingle_modal"})).html_safe

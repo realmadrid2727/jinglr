@@ -1,0 +1,24 @@
+%header.header.bg-black.navbar.navbar-inverse
+  .collapse.navbar-collapse.pull-in
+    - if content_for?(:header)
+      %ul.nav.navbar-nav.m-l-n
+        = yield(:header)
+      
+    = render partial: "shared/user"
+    
+    %ul.nav.navbar-nav.navbar-right.search-navbar
+      %li
+        %a.dropdown-toggle#search_form{href: "#", data: {toggle: "dropdown"}}
+          %i.icon-search.text-white
+    
+        %section.dropdown-menu.animated.fadeInUp.search-bar
+          %section.panel
+            = form_tag search_path, class: "navbar-form navbar-right m-t-sm", role: "search", method: :get do
+              .form-group.bg-dark.search-fix
+                .input-group.input-s-lg.input-append.m-sm
+                  %input.form-control.input-sm.no-border.bg-dark{type: "text", placeholder: "Search", name: "q"}
+                  %span.input-group-btn
+                    %button.btn.btn-sm.btn-success.btn-icon{type: "submit"}
+                      %i.icon-search
+
+    = render partial: "shared/audio_player"

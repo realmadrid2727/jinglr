@@ -1,0 +1,12 @@
+// $(".jplayer").jPlayer("stop");
+if ($(".file-uploader").length > 0) {
+  $("#jingle_<%= @jingle.id %>").remove().delay(300);
+  $("li.file-uploader").show();
+  $("#submit-jingle-button").addClass("disabled");
+  $(".track_1").fadeOut();
+  $(".track_1").remove();
+  //$tracks[1].remove();
+  //delete $tracks[1];
+} else {
+  $("#jingle_<%= @jingle.id %>").fadeOut("700");
+}

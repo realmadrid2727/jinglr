@@ -1,0 +1,60 @@
+- if @new_jingle.errors.present?
+  #error_explanation
+    %h2= t('flash.error', count: @new_jingle.errors.count)
+    %ul
+      - @new_jingle.errors.full_messages.each do |msg|
+        %li= msg
+
+.abox.new_jingle_form
+  %section.panel.no-borders.hbox
+    %aside.bg-info.clearfix.lter.r-r.text-right.v-middle.message_box#jingle_alerts
+      .wrapper.h3.font-thin
+        - unless jingle.blank?
+          = t('jingles.new.add_track')
+        - else
+          = t('jingles.new.title')
+    %aside
+      .pos-rlt
+        %span.arrow.left.hidden-xs
+        .panel-body                  
+          %section.panel.m-n
+            = form_tag add_jingles_path, id: "new_jingle_form", remote: true, method: :post do
+              = hidden_field_tag "id"
+              - unless jingle.blank?
+                = hidden_field_tag "jingle[parent_id]", jingle.id
+              %textarea.form-control.input-lg.no-border{rows: "4", maxlength: "200",
+                placeholder: t('jingles.new.describe'), id: "jingle_desc", name: "jingle[desc]"}
+              
+              %footer.panel-footer.bg-light.lter
+                - unless params[:option] == 'remote'
+                  %button.btn.btn-success.pull-right.disabled#submit-jingle-button{type: "submit"}= t('buttons.compose')
+                %ul.nav.nav-pills
+                  /%li#file-recorder
+                  /  %a{href: "#"}
+                  /    %i.icon-microphone
+                  /    = t('jingles.new.record')
+                  %li.file-uploader
+                    /= form.file_field :track
+                    %a.fileinput-button{href: "javascript:void(0)"}
+                      %i.icon-upload
+                      = t('jingles.new.upload')
+                      = file_field_tag "jingle[track]", data: {target: jingles_path, errorbox: "#jingle_alerts", error: t('flash.alert.jingle_upload')}
+                  %li.file-uploader-details
+                    .uploader
+                      #progress.progress.progress-sm.progress-striped.active.new-jingle-progress{style: "display: none;"}
+                        .progress-bar.progress-bar-success
+                      #successful-upload.text-success{style: "display: none;"}
+                        %i.icon-check
+                      #files.files
+
+- if params[:option] == 'remote'
+  :javascript
+    $(document).ready(function() {
+      initialize_jingles_js();
+      $("#jingle_desc").lilCharacterCount();
+      
+      $(".modal-submit").on('click', function(e) {
+        e.preventDefault();
+        $("#new_jingle_form").submit();
+      });
+    });

@@ -1,0 +1,9 @@
+.panel.bg-white.m-b
+  .panel-body.form-inline
+    %label= t('filter.from')
+    %input.input-sm.input-s.datepicker-input.form-control#sort-jingles-from{type: "text",
+      value: params[:from] || (Time.now - 1.month).strftime("%m-%d-%Y"), size: "10", "data-date-format" => "mm-dd-yyyy"}
+    %label= t('filter.to')
+    %input.input-sm.input-s.datepicker-input.form-control#sort-jingles-to{type: "text",
+      value: params[:to] || Time.now.strftime("%m-%d-%Y"), size: "10", "data-date-format" => "mm-dd-yyyy"}
+    = link_to(t('buttons.do_it'), "#", class: "btn btn-info btn-sm", id: "sort-jingles-button")

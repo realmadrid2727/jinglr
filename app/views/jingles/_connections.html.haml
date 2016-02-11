@@ -1,0 +1,32 @@
+- if jingle.connections.blank?
+  %section.panel.no-borders.hbox
+    %aside.bg-danger.clearfix.lter.r-r.text-right.v-middle
+      .wrapper.h3.font-thin
+        = t('jingles.connections.empty_head')
+    %aside
+      .pos-rlt
+        %span.arrow.left.hidden-xs
+        .panel-body
+          = t('jingles.connections.empty').html_safe
+- else
+  .timeline
+    - jingle.connections.each do |connection|
+      %article.timeline-item
+        .timeline-caption
+          .panel
+            .panel-body
+              %span.arrow.left
+              %span.timeline-icon
+                %a{href: jingle_path(connection)}
+                  = jingle_connection_icon(connection)
+              %span.timeline-date= link_to(show_time(connection.created_at), jingle_path(connection))
+              %h5
+                %span.user
+                  = image_tag(connection.user.avatar(:small), alt: connection.user.display_name, class: "thumb-xs img-circle pull-left m-r-xs")
+                  = link_to(connection.user.display_name, profile_path(connection.user.username))
+                = hashtag_auto_link(connection.desc)
+
+:javascript
+  $(function() {
+    $("[data-toggle=tooltip]").tooltip();
+  });

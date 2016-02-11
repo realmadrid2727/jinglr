@@ -1,0 +1,36 @@
+- content_for :title do
+  = t('sessions.new.title')
+
+%header.panel-heading.text-center= t('buttons.login')
+= form_for(resource, as: resource_name, url: session_path(resource_name), html: {class: "panel-body"}) do |f|
+  - if flash.alert
+    .alert.alert-danger.m-t
+      %button.close{type: "button", data: {dismiss: "alert"}}
+        %i.icon-remove
+      %i.icon-ban-circle
+      = flash.alert
+  = devise_error_messages!
+  .form-group
+    = f.label :username, class: "control-label"
+    = f.text_field :username, autofocus: true, class: "form-control"
+  .form-group
+    = f.label :password, class: "control-label"
+    = f.password_field :password, class: "form-control"
+  - if devise_mapping.rememberable?
+    .checkbox
+      = f.check_box :remember_me
+      = f.label :remember_me
+
+  %button.btn.btn-success.btn-block{type: "submit"}= t('buttons.let_me_in')
+  
+  .line.line-dashed
+  %a.btn.btn-facebook.btn-block.m-b-sm{href: user_omniauth_authorize_path(:facebook)}
+    %i.icon-facebook.pull-left
+    = t('sessions.new.facebook')
+  /%a.btn.btn-twitter.btn-block.m-b-sm{href: user_omniauth_authorize_path(:twitter)}
+  /  %i.icon-twitter.pull-left
+  /  = t('sessions.new.twitter')
+  .line.line-dashed
+  %p.text-muted.text-center
+    %small= t('sessions.new.new')
+  = link_to(t('sessions.new.create'), new_user_registration_path, class: "btn btn-white btn-block")

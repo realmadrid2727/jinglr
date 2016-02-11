@@ -1,0 +1,69 @@
+- title ||= title
+- search ||= search
+- bypass_header ||= bypass_header
+
+- if search
+  - unless jingles.blank?
+    - unless bypass_header
+      %section.panel.bg-info{class: params[:sort] ? 'm-n' : 'm-b'}
+        .panel-body
+          = search_title
+          %span.label.bg-light= search_term
+      - if params[:sort]
+        = render partial: "shared/filter_date"
+    - jingles.each do |jingle|
+      .col-md-12.jingle.infinite-selector{id: "jingle_#{jingle.id}"}
+        = render partial: "jingles/jingle", locals: {jingle: jingle}
+    
+  - else
+    - if title
+      %h4.m= title
+    %section.panel.no-borders.hbox{class: params[:sort] ? 'm-n' : 'm-b'}
+      %aside.bg-warning.clearfix.lter.r-r.text-right.v-middle
+        .wrapper.h3.font-thin
+          = t('search.index.no_results_head')
+      %aside
+        .pos-rlt
+          %span.arrow.left.hidden-xs
+          .panel-body                  
+            = t('search.index.no_results')
+            %span.label.bg-light= search_term
+            - if params[:sort]
+              = t('search.index.range', from: params[:from], to: params[:to])
+            
+    - if params[:sort]
+      = render partial: "shared/filter_date"
+            
+- else
+  - if jingles.empty? && (user_signed_in? && !current_user.jingles.blank?) || (!user_signed_in? && jingles.empty?)
+    %section.panel.no-borders.hbox
+      %aside.bg-warning.clearfix.lter.r-r.text-right.v-middle
+        .wrapper.h3.font-thin
+          = t('search.index.no_results_head')
+      %aside
+        .pos-rlt
+          %span.arrow.left.hidden-xs
+          .panel-body                  
+            = t('jingles.index.empty')
+              
+  - else
+    - if params[:sort] && !bypass_header
+      = render partial: "shared/filter_date"
+    - if title && !params[:sort]
+      %h4.m= title
+    - elsif params[:sort] && !params[:page]
+      - if params[:sort] == "likes"
+        %h4.m= t('jingles.index.header.most_likes')
+      - if params[:sort] == "favorites"
+        %h4.m= t('jingles.index.header.most_favorites')
+        
+    - jingles.each do |jingle|
+      .col-md-12.jingle.infinite-selector{id: "jingle_#{jingle.id}"}
+        = render partial: "jingles/jingle", locals: {jingle: jingle}
+
+= paginate(jingles)
+
+:javascript
+  $(document).ready(function() {
+    fade_in_images();
+  });

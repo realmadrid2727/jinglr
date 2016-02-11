@@ -1,0 +1,48 @@
+- content_for :title do
+  = t('track_mixer.index.title')
+
+- content_for :header do
+  = render partial: "mixer/tour/index"
+
+- if track_mixer_has_tracks?
+  = form_tag merge_jingles_path, id: "track_mixer_form", method: :post, remote: true do
+    .col-lg-12.m-t#mixer
+      = render partial: "shared/beta", locals: {text: t('beta.track_mixer.index')}
+      %h4= t('track_mixer.index.guide')
+      .panel
+        .panel-body.scrollable
+          - @jingles.each_with_index do |jingle, i|
+            = render partial: "mixer/track", locals: {jingle: jingle, i: i}
+        %i.icon-arrow-right.pull-right.mixer-scroll-right
+        %i.icon-arrow-left.pull-left.mixer-scroll-left{style: "display: none;"}
+        .panel-body.text-center
+          = icon_link("", {href: "#", class: "btn btn-info btn-lg track-play"}, "icon-play")
+            
+    
+    .col-lg-12
+      %textarea.form-control.input-lg.no-border{rows: "2", maxlength: "200",
+        placeholder: "Describe this jingle", id: "jingle_desc_mixer", name: "jingle[desc]"}
+    
+    .col-lg-12.m-t
+      .pull-right.m-b
+        = link_to(t('buttons.cancel'), jingles_path, class: "btn btn-danger")
+        %button{type: "submit", id: "merge-submit-button", class: "btn btn-success disabled"}
+          %i.icon-beaker
+          = t('buttons.merge')
+- else
+  %section.panel.no-borders.hbox
+    %aside.bg-danger.clearfix.lter.r-r.text-right.v-middle
+      .wrapper.h3.font-thin
+        = t('track_mixer.index.empty_head')
+    %aside
+      .pos-rlt
+        %span.arrow.left.hidden-xs
+        .panel-body
+          = t('track_mixer.index.empty').html_safe
+
+#mixer-tracks-json
+
+:javascript
+  $(document).ready(function() {
+    fade_in_images();
+  });

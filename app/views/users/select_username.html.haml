@@ -1,0 +1,20 @@
+- content_for :title do
+  = t('users.select_username.title')
+
+.well.m-n.text-center
+  = t('users.select_username.helper')
+%section.panel.no-borders.hbox
+  %aside.bg-info.clearfix.lter.r-r.text-right.v-middle.message_box#details_alerts
+    .wrapper.h3.font-thin
+      = t('users.select_username.title')
+  %aside
+    .pos-rlt
+      %span.arrow.left.hidden-xs
+      .panel-body                  
+        = form_tag set_username_user_path(current_user), class: "form-horizontal remote_submit_form",
+          method: :put, data: {errorbox: "#details_alerts"} do
+          .input-group
+            %span.input-group-addon= APP_CONFIG["domain"]+"/"
+            = text_field_tag "user[username]", current_user.username, class: "bg-focus form-control"
+            %span.input-group-btn
+              %button{type: "submit", class: "btn btn-success"}= t('buttons.do_it')

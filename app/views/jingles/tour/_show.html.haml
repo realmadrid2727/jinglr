@@ -1,0 +1,74 @@
+%li
+  %a#start-tour{href: "#"}
+    %i.icon-question-sign
+    = t('buttons.tour_help')
+
+:javascript
+  $(document).ready(function() {
+    tour = new Tour({
+      //backdrop: true,
+      name: "jingles-show",
+      template: "#{escape_javascript(render partial: 'shared/tour_template')}"
+    });
+      tour.addSteps([
+        {
+            element: "a[id^=collaborations_count_]",
+            title: "Tracks",
+            content: "This will show you all the contributions made to this jingle. The original track, added tracks, source tracks - all of that will appear here.",
+            placement: "bottom"
+        },
+        {
+            element: "a[id^=comments_count_]",
+            title: "Comments",
+            content: "View the comments posted about this jingle.",
+            placement: "bottom"
+        },
+        {
+            element: "a[id^=options_tab_]",
+            title: "Options",
+            content: "Extra options, such as sharing and deleting.",
+            placement: "bottom"
+        },
+        {
+            element: ".like-submit-ajax",
+            title: "Like",
+            content: "Liking a jingle is a good way to boost its ranking and show others you enjoyed what you heard. The jingle owner will be notified.",
+            placement: "left"
+        },
+        {
+            element: ".favorite",
+            title: "Favorite",
+            content: "Favoriting a jingle is essentially just bookmarking it. It'll appear in your favorites list. The jingle owner will <strong>not</strong> be notified.",
+            placement: "left"
+        },
+        {
+            element: ".follow",
+            title: "Follow Updates",
+            content: "Receive notifications when this jingle has new comments, tracks, or it gets used as a part of another jingle.",
+            placement: "left"
+        },
+        {
+            element: "#browser-sidebar .add-track",
+            title: "Add a Track",
+            content: "This allows you to add a track to this jingle. Once you upload it, tweak it, and submit it, the owner of the jingle will be given the opportunity to accept or decline your merge request. <strong>Note:</strong> If the owner declines your merge request, your track will still exist as a standalone jingle.",
+            placement: "right"
+        },
+        {
+            element: "#browser-sidebar .add-to-mixer",
+            title: "Add to Mixer",
+            content: "Adds the track to your track mixer, so you can mix two tracks together to create a new jingle. <strong>Note:</strong> Using the track mixer to create a new jingle means you're taking two existing jingles to create a new one, rather than uploading a new audio file. The tracks you add to your mixer don't need to be yours, they can belong to anyone, but the jingle you create will belong to you.",
+            placement: "right"
+        },
+        {
+            element: ".view-connections",
+            title: "View Connections",
+            content: "Shows you all jingles connected to this jingle in some way. For example, if this track was used to create another song, you'll see that information. It's a cool way to know how this track has been used.",
+            placement: "right"
+        }
+    ]);
+    
+    $("body").on("click", "#start-tour", function(e) {
+      e.preventDefault();
+      tour.restart(true);
+    });
+  });

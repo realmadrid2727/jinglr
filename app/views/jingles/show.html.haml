@@ -1,0 +1,43 @@
+- content_for :title do
+  = t('jingles.show.title')
+
+- content_for :header do
+  = render partial: "jingles/tour/show"
+
+- content_for :browser do
+  .list-group.bg-white
+    %span.bg-dark.list-group-item= t('jingles.show.browser.title')
+    = icon_link(t('jingles.show.browser.add_track'), {href: new_jingle_track_jingle_path(jingle), class: "list-group-item add-track"}, "icon-plus m-r")
+    = icon_link(t('jingles.show.browser.add_to_mixer'), {href: "#", class: "list-group-item add-to-mixer"}, "icon-beaker m-r")
+    = icon_link(t('jingles.show.browser.view_tree'), {href: connections_jingle_path(jingle), class: "list-group-item view-connections ajax-tab", data: {target: "#connections"}}, "icon-sitemap m-r")
+
+/-# jingle.normalized_offsets.each do |a|
+/  %p #{a.id} - #{a.offset}
+/=# jingle.combine_tracks
+.col-md-12.jingle.m-t{id: "jingle_#{jingle.id}"}
+  = render partial: "jingle", locals: {jingle: jingle}
+  #connections
+  
+
+:javascript
+  $(document).ready(function() {
+    fade_in_images();
+  });
+  
+- if user_signed_in?
+  :javascript
+    $(document).ready(function() {
+      $(".add-to-mixer").click(function(e) {
+        e.preventDefault();
+        $("#jingle_#{jingle.id} section .track-img").effect("transfer", { to: "#track-mixer span:last-child" }, 250);
+
+        $.ajax({
+          url: "#{mixer_add_track_remote_mixer_index_path}",
+          data: "jingle_id=#{jingle.id}",
+          type: "PUT",
+          context: document.body
+        }).success(function(data) {
+          $("#track-mixer").append(data);
+        });
+      });
+    });

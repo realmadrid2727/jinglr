@@ -1,0 +1,5 @@
+%article.comment-item.comment-reply{id: "track_reply_#{jingle.id}"}
+  %section.comment-body.panel.panel.text-sm.bg-light
+    .panel-body
+      %strong
+        = t('jingles.tracks.origin.title', user: "#{link_to(image_tag(origin.jingle.user.avatar(:small), alt: '', class: 'img-circle'), profile_path(origin.jingle.user.username), class: 'thumb-xs pull-left m-r-xs')} #{link_to(origin.jingle.user.display_name, profile_path(origin.jingle.user.username))}", track: link_to(t('jingles.tracks.origin.this_track'), jingle_path(origin.jingle))).html_safe

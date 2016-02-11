@@ -1,0 +1,11 @@
+%span.list-group-item.jingle
+  %span.track-img{data: {toggle: "tooltip", placement: "bottom"}, title: truncate(jingle.desc, length: 65)}
+    %span.name.label.bg-light= t('track_mixer.owner', user: link_to(jingle.user.display_name, profile_path(jingle.user.username))).html_safe
+    = image_tag(jingle.waveform_url, alt: "Waveform")
+  = icon_link("", {href: mixer_remove_track_remote_mixer_index_path(jingle), class: "btn btn-danger btn-sm track-delete", data: {method: :put, remote: true}}, "icon-remove")
+  
+:javascript
+  $(document).ready(function() {
+    fade_in_images();
+    $("[data-toggle=tooltip]").tooltip();
+  });

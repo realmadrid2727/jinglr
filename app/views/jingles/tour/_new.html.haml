@@ -1,0 +1,50 @@
+%li
+  %a#start-tour{href: "#"}
+    %i.icon-question-sign
+    = t('buttons.tour_help')
+
+:javascript
+  $(document).ready(function() {
+    tour = new Tour({
+      //backdrop: true,
+      name: "jingles-new",
+      template: "#{escape_javascript(render partial: 'shared/tour_template')}"
+    });
+      tour.addSteps([
+        {
+            element: "#mixer .panel-body.scrollable",
+            title: "Track Mixer",
+            content: "After uploading a track, it'll appear right below this one. Click and drag tracks across the timeline if you need to adjust the timing of tracks you're about to merge. You can scroll to the right to see more of the track.",
+            placement: "bottom"
+        },
+        {
+            element: ".track_0 .view-track",
+            title: "View Jingle",
+            content: "Click this to see the jingle that makes up this track.",
+            placement: "right"
+        },
+        {
+            element: ".track_0 .offset",
+            title: "Offset Seconds",
+            content: "This shows the number of seconds you've offset a track.",
+            placement: "right"
+        },
+        {
+            element: ".track-play",
+            title: "Play/Stop Button",
+            content: "Play and stop the tracks to preview what your merge will sound like. <strong>Note:</strong> It's good to preview a couple of times, because your browser may occasionally lag, causing incorrect offsets.",
+            placement: "top"
+        },
+        {
+            element: ".file-uploader",
+            title: "Upload Button",
+            content: "Upload your audio file here. It'll appear in the track mixer above in case you'd like to line things up properly with the track you're mixing to.",
+            placement: "top"
+        }
+    ]);
+    
+    $("body").on("click", "#start-tour", function(e) {
+      e.preventDefault();
+      tour.restart(true);
+    });
+  });

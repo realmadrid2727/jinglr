@@ -1,0 +1,15 @@
+%section
+  .row.fileupload-buttonbar
+    .span7
+      %span.btn.btn-success.fileinput-button
+        %i.icon-plus.icon-white
+        %span Add File
+        = file_field_tag "user[avatar]",
+          data: {target: upload_avatar_user_path(current_user), errorbox: "#avatar_alerts"},
+          class: "remote_submit_form"
+    .span5
+      #progress.progress.progress-sm.progress-striped.active.avatar-progress{style: "display: none;"}
+        .progress-bar.progress-bar-success
+      #successful-avatar-upload.text-success{style: "display: none;"}
+        %i.icon-check
+      #files.files

@@ -1,0 +1,10 @@
+$("<%= escape_javascript(render partial: 'jingle_comments/comment', locals: {comment: @comment}, object: @comment) %>").insertAfter("#comments_<%= @comment.jingle.id %> .comment-list .comment-item:last").effect("highlight", {}, 4000);
+var $comments_container = $("#comments_<%= @comment.jingle.id %> .comment-list");
+var $comment_form = $("#jingle_comment_desc_<%= @comment.jingle.id%>");
+var $comment_count_container = $("#comments_count_<%= @comment.jingle.id %> span");
+var comment_count = parseInt($comment_count_container.html()) + 1;
+
+$comments_container.slimScroll({ scrollTo: ($comments_container.prop('scrollHeight') + 200) });
+$comment_count_container.html(comment_count);
+$comment_form.val("");
+$comment_form.parent().children(".character-count").html("200");

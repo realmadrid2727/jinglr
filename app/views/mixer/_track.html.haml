@@ -1,0 +1,22 @@
+- @jingles = @jingles || nil
+%div{id: "track_#{i}", data: {path: jingle.latest_url, waveform: jingle.waveform_url, duration: jingle.track_duration}}
+= hidden_field_tag "jingle[tracks][#{jingle.id}#{'d' if @jingles && jingle.id == @jingles[i].id && i > 0}]", "0", id: "track_offset_#{i}"
+.track{class: "track_#{i}"}
+  .info
+    .panel-body
+      .clearfix
+        = link_to(image_tag(jingle.user.avatar(:small), alt: jingle.user.display_name, title: jingle.user.display_name, class: "img-circle"), profile_path(jingle.user.username), class: "thumb-sm pull-left m-r")
+        %small.text-muted
+          = icon_link("", {href: jingle_path(jingle), class: "btn btn-info btn-xs m-b-xs view-track"}, "icon-music")
+        - if request.path == mixer_index_path
+          %small.text-muted
+            = icon_link("", {href: mixer_remove_track_remote_mixer_index_path(jingle), class: "btn btn-danger btn-xs track-mixer-delete", data: {method: :put, remote: true, index: i}}, "icon-remove")
+      .offset.label.bg-light.m-t-sm
+        = t('track_mixer.index.track.offset')
+        %span 0.000
+  .jingle
+    .track-img
+      .progressbar-holder
+        .progressbar
+      = image_tag(jingle.waveform_url, alt: "Waveform", id: "waveform_#{i}")
+      .pull-left.jingle-desc.label.bg-light= jingle.desc.blank? ? t('track_mixer.index.track.your_track') : jingle.desc

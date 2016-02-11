@@ -1,0 +1,4 @@
+.col-md-12.jingle
+  - followers.each do |follow|
+    = render partial: "follower", locals: {follower: follow.followable}
+= paginate(followers)
